@@ -1,7 +1,5 @@
 ﻿var _callAjax = (function () {
-	//var urlApi = "http://10.100.0.154:8001"
-	var urlApi = "http://103.183.121.70:8002"
-	//var urlApi = "https://localhost:8001"
+	var urlApi = localStorage.getItem("BaseUrlApi");
 	var _auth = {
 		Login: function ($formLogin) {
 			var request = _constructorCommon.auth.Login($formLogin);
@@ -66,16 +64,14 @@
 			var configAjax = {
 				url: '/Auth/ForgetPassword?email=' + email,
 				type: 'POST',
+				beforeSend: function () { },
+				complete: function () { },
 				success: function (res) {
 					var data = res.data ?? res;
 					console.log(data);
 					if (!data.isSuccess) {
 						ShowPopupFail(data.message);
 					} else {
-						ShowPopupSuccess(data.message);
-						setTimeout(function () {
-							RedirectToUrl(res);
-						}, 2000);
 					}
 				}
 			}
@@ -153,14 +149,13 @@
 		CheckEmail: function ($email, $validate) {
 			if ($email.val() != "") {
 				var configAjax = {
-					url: urlApi + '/api/orther/check/email/' + $email.val(),
+					url: urlApi + '/orther/check/email/' + $email.val(),
 					type: 'GET',
 					beforeSend: function () { },
 					complete: function () { },
 					success: function (data) {
 						if (data) {
 							$validate.show();
-							$email.focus();
 						}
 						else {
 							$validate.hide();
@@ -174,14 +169,13 @@
 		CheckUsername: function ($username, $validate) {
 			if ($username.val() != "") {
 				var configAjax = {
-					url: urlApi + '/api/orther/check/username/' + $username.val(),
+					url: urlApi + '/orther/check/username/' + $username.val(),
 					type: 'GET',
 					beforeSend: function () { },
 					complete: function () { },
 					success: function (data) {
 						if (data) {
 							$validate.show();
-							$username.focus();
 						}
 						else {
 							$validate.hide();
@@ -195,14 +189,13 @@
 		CheckPhoneNumber: function ($phoneNumber, $validate) {
 			if ($phoneNumber.val() != "") {
 				var configAjax = {
-					url: urlApi + '/api/orther/check/phone-number/' + $phoneNumber.val(),
+					url: urlApi + '/orther/check/phone-number/' + $phoneNumber.val(),
 					type: 'GET',
 					beforeSend: function () { },
 					complete: function () { },
 					success: function (data) {
 						if (data) {
 							$validate.show();
-							$phoneNumber.focus();
 						}
 						else {
 							$validate.hide();
