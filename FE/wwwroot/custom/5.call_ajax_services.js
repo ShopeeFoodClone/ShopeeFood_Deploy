@@ -40,7 +40,7 @@
 			callAjax.run();
 		},
 		ForgetPassword: function ($formForgetPassword) {
-			var email = $formForgetPassword.find("#email").val();
+			var email = $formForgetPassword.find("#Email").val();
 			var configAjax = {
 				url: '/Auth/ForgetPassword?email=' + email,
 				type: 'POST',
@@ -146,7 +146,7 @@
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
 		},
-		CheckEmail: function ($email, $validate) {
+		CheckEmail: function ($email, callBack) {
 			if ($email.val() != "") {
 				var configAjax = {
 					url: urlApi + '/orther/check/email/' + $email.val(),
@@ -154,19 +154,14 @@
 					beforeSend: function () { },
 					complete: function () { },
 					success: function (data) {
-						if (data) {
-							$validate.show();
-						}
-						else {
-							$validate.hide();
-						}
+						callBack(data);
 					},
 				}
 				var callAjax = new AjaxOption(configAjax);
 				callAjax.run();
 			}
 		},
-		CheckUsername: function ($username, $validate) {
+		CheckUsername: function ($username, callBack) {
 			if ($username.val() != "") {
 				var configAjax = {
 					url: urlApi + '/orther/check/username/' + $username.val(),
@@ -174,19 +169,14 @@
 					beforeSend: function () { },
 					complete: function () { },
 					success: function (data) {
-						if (data) {
-							$validate.show();
-						}
-						else {
-							$validate.hide();
-						}
+						callBack(data);
 					},
 				}
 				var callAjax = new AjaxOption(configAjax);
 				callAjax.run();
 			}
 		},
-		CheckPhoneNumber: function ($phoneNumber, $validate) {
+		CheckPhoneNumber: function ($phoneNumber, callBack) {
 			if ($phoneNumber.val() != "") {
 				var configAjax = {
 					url: urlApi + '/orther/check/phone-number/' + $phoneNumber.val(),
@@ -194,12 +184,7 @@
 					beforeSend: function () { },
 					complete: function () { },
 					success: function (data) {
-						if (data) {
-							$validate.show();
-						}
-						else {
-							$validate.hide();
-						}
+						callBack(data)
 					},
 				}
 				var callAjax = new AjaxOption(configAjax);
@@ -433,31 +418,35 @@
 				type: 'POST',
 				beforeSend: function () { },
 				complete: function () { },
-				success: function (data) {
+				success: function (res) {
+					var data = res.data ?? res;
 					if (!data.isSuccess) {
 						ShowPopupFail(data.message);
-						var $btnOk = $("#modalAPI").find("#btnOk");
-						$btnOk.removeAttr("data-bs-dismiss");
-						$btnOk.on("click", function () {
-							var configAjaxChild = {
-								url: '/Cart/ClearCart',
-								type: 'POST',
-								success: function (data) {
-									if (!data.isSuccess) {
-										ShowPopupFail(data.message);
-									} else {
-										ShowPopupSuccess(data.message);
-										$btnOk.attr("data-bs-dismiss", "modal");
-										$btnOk.unbind("click");
-									}
-								}
-							}
-							var callAjaxChild = new AjaxOption(configAjaxChild);
-							callAjaxChild.run();
-						});
+						//var $btnOk = $("#modalAPI").find("#btnOk");
+						//$btnOk.removeAttr("data-bs-dismiss");
+						//$btnOk.on("click", function () {
+						//	var configAjaxChild = {
+						//		url: '/Cart/ClearCart',
+						//		type: 'POST',
+						//		success: function (data) {
+						//			if (!data.isSuccess) {
+						//				ShowPopupFail(data.message);
+						//			} else {
+						//				ShowPopupSuccess(data.message);
+						//				$btnOk.attr("data-bs-dismiss", "modal");
+						//				$btnOk.unbind("click");
+						//			}
+						//		}
+						//	}
+						//	var callAjaxChild = new AjaxOption(configAjaxChild);
+						//	callAjaxChild.run();
+						//});
 					} else {
 						$("#toastAddToCart").find("#toastContent").html(data.message);
 						$("#toastAddToCart").toast("show");
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1300);
 					}
 				}
 			}
@@ -481,7 +470,7 @@
 						ShowPopupFail(data.message);
 					}
 					else {
-						RedirectToUrl(res);
+							RedirectToUrl(res);
 					}
 				}
 			}

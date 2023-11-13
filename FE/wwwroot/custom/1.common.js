@@ -45,6 +45,7 @@ function RemoveLoading() {
 	});
 }
 $(function () {
+	
 	/*For total*/
 	$(".detail-cart").each(function () {
 		$(this).on("input", ".quantity", function () {
@@ -115,3 +116,4 @@ $(function () {
 function HideAllModal() {
 	$(".modal").modal("hide");
 }
+

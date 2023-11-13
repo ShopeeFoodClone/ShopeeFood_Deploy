@@ -14,6 +14,14 @@
 	else {
 		var $isLogin = $("#isLogin");
 		if ($isLogin.length > 0) {
+			$(".quantity").on("input", function () {
+				var quantity = $(this).val();
+				var idProduct = $(this).attr("data-id-product")
+				if (quantity > 0) {
+					_callAjax.cart.UpdateDetailsCart(idProduct, quantity);
+				}
+			});
+
 			$(".btn-add-to-cart").on("click", function () {
 				var id_product = $(this).attr("data-id-product");
 				_callAjax.cart.AddToCart(id_product);
@@ -25,4 +33,5 @@
 			});
 		}
 	}
+	
 });
