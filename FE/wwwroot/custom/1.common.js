@@ -45,7 +45,12 @@ function RemoveLoading() {
 	});
 }
 $(function () {
-	
+	$(".number-only").on("keydown", function (e) {
+		// Only allow if the e.key value is a number or if it's 'Backspace'
+		if (isNaN(e.key) && e.key !== 'Backspace' && e.key !== 'Tab') {
+			e.preventDefault();
+		}
+	});
 	/*For total*/
 	$(".detail-cart").each(function () {
 		$(this).on("input", ".quantity", function () {
@@ -116,4 +121,3 @@ $(function () {
 function HideAllModal() {
 	$(".modal").modal("hide");
 }
-
