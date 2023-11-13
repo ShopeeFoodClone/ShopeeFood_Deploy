@@ -122,7 +122,8 @@ html, body {
 
 .logo-header {
 	height: 30px;
-	width:100%;
+	object-fit: cover;
+	width: 100%;
 }
 
 header {
@@ -265,7 +266,7 @@ main {
 }
 
 #main {
-	position:relative;
+	position: relative;
 	margin-top: -100px;
 	background-image: url(/imgs/main-banner.jpg);
 	background-position: center;
@@ -276,19 +277,21 @@ main {
 }
 
 #left {
-	margin-top:0px;
+	margin-top: 0px;
 	padding-top: 300px;
 	padding-bottom: 100px;
 	position: sticky;
 	align-self: flex-start; /* <-- this is the fix */
 }
+
 #right {
 	padding-top: 100px;
 	padding-bottom: 100px;
 }
-	#main::-webkit-scrollbar {
-		display: none;
-	}
+
+#main::-webkit-scrollbar {
+	display: none;
+}
 
 .card .card-title {
 	display: -webkit-box;
@@ -407,11 +410,13 @@ footer {
 	.dropdown-filter .dropdown-filter-item {
 		flex: 1 0 41% !important; /* explanation below */
 	}
+
 	#left {
 		padding-top: 150px;
 		padding-bottom: 50px;
 		position: relative;
 	}
+
 	.dropdown-filter {
 		right: -400px;
 		width: 340px;
@@ -483,7 +488,7 @@ footer {
 
 	.row-item .row-item-img {
 		height: 70px;
-		object-fit:cover;
+		object-fit: cover;
 		width: 70px;
 	}
 
@@ -575,11 +580,13 @@ footer {
 	bottom: 20px;
 	right: 20px;
 }
+
 .shadow-custom {
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
 .text-green {
-	color: #239839!important;
+	color: #239839 !important;
 }
 
 .group-password {
