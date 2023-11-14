@@ -45,9 +45,31 @@ function RemoveLoading() {
 	});
 }
 $(function () {
+	if ($(".slc-cities").length > 0) {
+		var $cities = $(".slc-cities");
+		_callAjax.common.LoadCities(function (data) {
+			$cities.html(data);
+		});
+		$cities.on("change", function () {
+			$districts = $(".slc-districts");
+			var idCity = $cities.find("option:selected").val();
+			_callAjax.common.LoadDistricts(idCity, function (data) {
+				$districts.html(data);
+			});
+			$districts.on("change", function () {
+				$wards = $(".slc-wards");
+				var idDistricts = $districts.find("option:selected").val();
+				_callAjax.common.LoadWards(idDistricts, function (data) {
+					$wards.html(data);
+				});
+			});
+		});
+	}
+
+	// handle input enter only digit
 	$(".number-only").on("keydown", function (e) {
 		// Only allow if the e.key value is a number or if it's 'Backspace'
-		if (isNaN(e.key) && e.key !== 'Backspace' && e.key !== 'Tab') {
+		if (isNaN(e.key) && e.key !== 'Backspace' && e.key !== 'Tab' && e.key !== 'Ctrl') {
 			e.preventDefault();
 		}
 	});

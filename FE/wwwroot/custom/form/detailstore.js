@@ -1,5 +1,14 @@
 ﻿$(function () {
-
+	$("#btnClearCart").on("click", function () {
+		_callAjax.cart.ClearCart();
+	});
+	$("#searchProduct").on("input", function () {
+		var $divProducts = $("#partial-products");
+		var searchText = $(this).val();
+		_callAjax.store.SearchProduct(searchText, function (data) {
+			$divProducts.html(data);
+		});
+	});
 	var $check = $("#closed");
 	if ($check.length > 0) {
 		$('#modalAlertClosed').modal("show");

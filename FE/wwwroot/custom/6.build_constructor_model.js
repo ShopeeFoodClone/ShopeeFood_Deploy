@@ -8,20 +8,22 @@
 				Password: password
 			}
 		},
-		Register: function ($formRegister) {
+		Register: function (fullAddress, $formRegister) {
 			var username = $formRegister.find('#Username').val();
 			var fullName = $formRegister.find('#FullName').val();
 			var phoneNumber = $formRegister.find('#PhoneNumber').val();
 			var email = $formRegister.find('#Email').val();
 			var password = $formRegister.find('#Password').val();
 			var confirmPassword = $formRegister.find('#ConfirmPassword').val();
+			var address = fullAddress;
 			return {
 				Username: username,
 				FullName: fullName,
 				Password: password,
 				PasswordConfirm: confirmPassword,
 				PhoneNumber: phoneNumber,
-				Email: email
+				Email: email,
+				Address: address
 			}
 		},
 	};
@@ -96,13 +98,14 @@
 		}
 	};
 	var _information = {
-		UpdateProfile: function ($formUpdate) {
+		UpdateProfile: function (fulladdress, $formUpdate) {
 			var fullName = $formUpdate.find("#fullName").val();
 			var gender = $formUpdate.find("#slc-gender option:selected").val();
 			var email = $formUpdate.find("#email").val();
 			var phoneNumber = $formUpdate.find("#phoneNumber").val();
-			var address = ""; // TODO: continue
 			var dob = $formUpdate.find("#dob").val();
+			// province
+			var address = fulladdress;
 
 			return {
 				UserId: "1",

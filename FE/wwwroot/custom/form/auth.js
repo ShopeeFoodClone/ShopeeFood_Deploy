@@ -6,7 +6,6 @@
 		const $inputPassword = $divParent.find("input");
 		const passwordFieldType = $inputPassword.attr('type');
 		if ($inputPassword.val() != "") {
-
 			if (passwordFieldType == 'password') {
 				$inputPassword.attr('type', 'text');
 				$btn.attr('src', '/imgs/Invisible.png');
@@ -27,8 +26,6 @@
 			_callAjax.auth.Login($(this));
 		})
 	}
-
-
 
 	if ($formForgetPassword.length > 0) {
 		var $email = $formForgetPassword.find("#Email");
@@ -60,8 +57,6 @@
 		})
 	}
 
-
-
 	if ($formRegister.length > 0) {
 		var $validate_email = $("#validate-email");
 		var $validate_username = $("#validate-username");
@@ -80,15 +75,23 @@
 		$formRegister.on('submit', function (e) {
 			e.preventDefault();
 			var $inputs = $formRegister.find("input");
-			console.log($inputs)
 			var isValid = true;
 			$inputs.each(function () {
 				if ($(this).val() == "") {
 					$(this).focus();
 					isValid = false;
-					return;
+					return false;
 				}
 			});
+
+			var city = $formRegister.find(".slc-cites option:selected").val();
+			var district = $formRegister.find(".slc-district option:selected").val();
+			var ward = $formRegister.find(".slc-wards option:selected").val();
+			var street = $formRegister.find("#street").val();
+			if (city == "" || district == "" || ward == "" || street == "") {
+				ShowPopupFail("Vui lòng nhập địa chỉ đầy đủ", "Thông báo");
+				return;
+			}
 			if (isValid && isValidEmail && isValidPhone && isValidUsername && isValidPassword) {
 				if ($password.val() != $password_confirm.val()) {
 					$validate_confirm_password.html("Mật khẩu xác nhận không trùng nhau");
@@ -98,12 +101,16 @@
 				else {
 					$validate_confirm_password.hide();
 				}
-				_callAjax.auth.Register($(this));
+				_callAjax.common.FullAddress(ward, function (fullAddress) {
+					fullAddress = street + ", " + fullAddress.data;
+					_callAjax.auth.Register(fullAddress, $formRegister);
+				});
 			}
 		})
 		$password.on("focusout", function () {
 			if ($password.val() == "") {
 				$validate_password.hide();
+				isValidPassword = false;
 				return;
 			}
 
@@ -113,11 +120,12 @@
 			} else {
 				$validate_password.html("Chưa thỏa điều kiện mật khẩu");
 				$validate_password.show();
+				isValidPassword = false;
 			}
-
 		});
 		$email.on("focusout", function () {
 			if ($email.val() == "") {
+				isValidEmail = false;
 				$validate_email.hide();
 				return;
 			}
@@ -126,6 +134,7 @@
 					if (data) {
 						$validate_email.html("Email đã được sử dụng, vui lòng sử dụng email khác")
 						$validate_email.show();
+						isValidEmail = false;
 					}
 					else {
 						isValidEmail = true;
@@ -134,12 +143,14 @@
 				});
 			}
 			else {
+				isValidEmail = false;
 				$validate_email.html("Email không hợp lệ")
 				$validate_email.show();
 			}
 		})
 		$phoneNumber.on("focusout", function () {
 			if ($phoneNumber.val() == "") {
+				isValidPhone = false;
 				$validate_phone.hide();
 				return;
 			}
@@ -158,10 +169,12 @@
 			else {
 				$validate_phone.html("Số điện thoại chưa hợp lệ")
 				$validate_phone.show();
+				isValidPhone = false;
 			}
 		})
 		$username.on("focusout", function () {
 			if ($username.val() == "") {
+				isValidUsername = false;
 				$validate_username.hide();
 				return;
 			}
@@ -169,6 +182,7 @@
 				if (data) {
 					$validate_username.html("Tên tài khoản đã được sử dụng, vui lòng sử dụng tên khác")
 					$validate_username.show();
+					isValidUsername = false;
 				}
 				else {
 					isValidUsername = true;
@@ -194,7 +208,6 @@ function RegexPassword(password) {
 		"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$"
 	);
 }
-
 
 // Login google
 var googleUser = {};

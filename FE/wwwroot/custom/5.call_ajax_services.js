@@ -21,8 +21,8 @@
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
 		},
-		Register: function ($formRegister) {
-			var request = _constructorCommon.auth.Register($formRegister);
+		Register: function (fullAddress, $formRegister) {
+			var request = _constructorCommon.auth.Register(fullAddress, $formRegister);
 			var configAjax = {
 				url: '/Auth/Register',
 				type: 'POST',
@@ -341,6 +341,20 @@
 			}
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
+		},
+		SearchProduct: function (searchText, callBack) {
+			var configAjax = {
+				url: '/Store/SearchProduct?searchText=' + searchText,
+				type: 'POST',
+				dataType: 'text',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					callBack(data);
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
 		}
 	};
 	var _information = {
@@ -369,8 +383,8 @@
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
 		},
-		UpdateProfile: function ($formUpdate) {
-			var request = _constructorCommon.information.UpdateProfile($formUpdate)
+		UpdateProfile: function (address, $formUpdate) {
+			var request = _constructorCommon.information.UpdateProfile(address, $formUpdate)
 			var configAjax = {
 				url: '/Account/Information',
 				type: 'POST',
@@ -422,25 +436,6 @@
 					var data = res.data ?? res;
 					if (!data.isSuccess) {
 						ShowPopupFail(data.message);
-						//var $btnOk = $("#modalAPI").find("#btnOk");
-						//$btnOk.removeAttr("data-bs-dismiss");
-						//$btnOk.on("click", function () {
-						//	var configAjaxChild = {
-						//		url: '/Cart/ClearCart',
-						//		type: 'POST',
-						//		success: function (data) {
-						//			if (!data.isSuccess) {
-						//				ShowPopupFail(data.message);
-						//			} else {
-						//				ShowPopupSuccess(data.message);
-						//				$btnOk.attr("data-bs-dismiss", "modal");
-						//				$btnOk.unbind("click");
-						//			}
-						//		}
-						//	}
-						//	var callAjaxChild = new AjaxOption(configAjaxChild);
-						//	callAjaxChild.run();
-						//});
 					} else {
 						$("#toastAddToCart").find("#toastContent").html(data.message);
 						$("#toastAddToCart").toast("show");
@@ -470,7 +465,7 @@
 						ShowPopupFail(data.message);
 					}
 					else {
-							RedirectToUrl(res);
+						RedirectToUrl(res);
 					}
 				}
 			}
@@ -521,7 +516,77 @@
 			}
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
+		},
+		ClearCart: function () {
+			var configAjax = {
+				url: '/Cart/ClearCart',
+				type: 'POST',
+				success: function (res) {
+					var data = res.data ?? res;
+					if (!data.isSuccess) {
+						ShowPopupFail(data.message);
+					} else {
+						ShowPopupSuccess(data.message);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
 		}
+	};
+	var _common = {
+		LoadCities: function (callBack) {
+			var configAjax = {
+				url: '/Home/PartialCities',
+				type: 'GET',
+				dataType: 'text',
+				success: function (res) {
+					callBack(res);
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		LoadDistricts: function (idCity, callBack) {
+			var configAjax = {
+				url: '/Home/PartialDistricts?idCity=' + idCity,
+				type: 'GET',
+				dataType: 'text',
+				success: function (res) {
+					callBack(res);
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		LoadWards: function (idDistrict, callBack) {
+			var configAjax = {
+				url: '/Home/PartialWards?idDistrict=' + idDistrict,
+				type: 'GET',
+				dataType: 'text',
+				success: function (res) {
+					callBack(res);
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		FullAddress: function (idWard, callBack) {
+			var configAjax = {
+				url: urlApi + '/province/full-address/' + idWard,
+				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					callBack(data);
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
 	}
 	return {
 		auth: _auth,
@@ -529,6 +594,7 @@
 		deal: _deal,
 		store: _store,
 		information: _information,
-		cart: _cart
+		cart: _cart,
+		common: _common
 	};
 })();
