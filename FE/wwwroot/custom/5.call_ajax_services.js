@@ -426,29 +426,23 @@
 		}
 	};
 	var _cart = {
-		AddToCart: function (idProduct) {
+		AddToCart: function (idProduct, callBack) {
 			var configAjax = {
 				url: '/Cart/AddProductToCart?idProduct=' + idProduct,
 				type: 'POST',
+				dataType:'text',
 				beforeSend: function () { },
 				complete: function () { },
 				success: function (res) {
-					var data = res.data ?? res;
-					if (!data.isSuccess) {
-						ShowPopupFail(data.message);
-					} else {
-						$("#toastAddToCart").find("#toastContent").html(data.message);
-						$("#toastAddToCart").toast("show");
-						setTimeout(function () {
-							RedirectToUrl(res);
-						}, 1300);
-					}
+					$("#toastAddToCart").find("#toastContent").html("Đã thêm vào giỏ hàng");
+					$("#toastAddToCart").toast("show");
+					callBack(res);
 				}
 			}
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
 		},
-		UpdateDetailsCart: function (idProduct, quantity) {
+		UpdateDetailsCart: function (idProduct, quantity, callBack) {
 			var request = {
 				IdProduct: idProduct,
 				Quantity: quantity
@@ -456,17 +450,12 @@
 			var configAjax = {
 				url: '/Cart/UpdateDetailsCart',
 				type: 'POST',
+				dataType:'text',
 				beforeSend: function () { },
 				complete: function () { },
 				data: JSON.stringify(request),
 				success: function (res) {
-					var data = res.data ?? res;
-					if (!data.isSuccess) {
-						ShowPopupFail(data.message);
-					}
-					else {
-						RedirectToUrl(res);
-					}
+					callBack(res);
 				}
 			}
 			var callAjax = new AjaxOption(configAjax);

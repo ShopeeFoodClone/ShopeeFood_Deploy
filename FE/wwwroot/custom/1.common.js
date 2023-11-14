@@ -45,6 +45,7 @@ function RemoveLoading() {
 	});
 }
 $(function () {
+	BuildInputPlusMinus();
 	if ($(".slc-cities").length > 0) {
 		var $cities = $(".slc-cities");
 		_callAjax.common.LoadCities(function (data) {
@@ -73,27 +74,7 @@ $(function () {
 			e.preventDefault();
 		}
 	});
-	/*For total*/
-	$(".detail-cart").each(function () {
-		$(this).on("input", ".quantity", function () {
-			var price = +$(".price").data("price");
-			var quantity = +$(this).val();
-			$("#total").text("$" + price * quantity);
-		})
 
-		var $buttonPlus = $(this).find('.increase-btn');
-		var $buttonMin = $(this).find('.decrease-btn');
-		var $quantity = $(this).find('.quantity');
-
-		/*For plus and minus buttons*/
-		$buttonPlus.click(function () {
-			$quantity.val(parseInt($quantity.val()) + 1).trigger('input');
-		});
-
-		$buttonMin.click(function () {
-			$quantity.val(Math.max(parseInt($quantity.val()) - 1, 1)).trigger('input');
-		});
-	});
 	//loading
 	const loader = document.querySelector(".preload")
 	loader.classList.add("loading-hidden")
@@ -142,4 +123,27 @@ $(function () {
 });
 function HideAllModal() {
 	$(".modal").modal("hide");
+}
+function BuildInputPlusMinus() {
+	/*For total*/
+	$(".detail-cart").each(function () {
+		$(this).on("input", ".quantity", function () {
+			var price = +$(".price").data("price");
+			var quantity = +$(this).val();
+			$("#total").text("$" + price * quantity);
+		})
+
+		var $buttonPlus = $(this).find('.increase-btn');
+		var $buttonMin = $(this).find('.decrease-btn');
+		var $quantity = $(this).find('.quantity');
+
+		/*For plus and minus buttons*/
+		$buttonPlus.click(function () {
+			$quantity.val(parseInt($quantity.val()) + 1).trigger('input');
+		});
+
+		$buttonMin.click(function () {
+			$quantity.val(Math.max(parseInt($quantity.val()) - 1, 1)).trigger('input');
+		});
+	});
 }
