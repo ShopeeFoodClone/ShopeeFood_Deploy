@@ -14,6 +14,10 @@
 		e.preventDefault();
 		var phoneNumber = $(this).find("#phoneNumber").val();
 		var deliveryAddress = $(this).find("#address").val();
+		if (phoneNumber == "" || deliveryAddress == "") {
+			ShowPopupFail("Vui lòng nhập thông tin đầy đủ");
+			return;
+		}
 		_callAjax.cart.Order(phoneNumber, deliveryAddress);
 	})
 
@@ -25,4 +29,11 @@
 		var $form = $("#statistic-filter");
 		_callAjax.cart.FilterHistoryOrder($form);
 	});
+
+	$("#slc-sort").on("change", function () {
+		var $form = $("#statistic-filter");
+		_callAjax.cart.FilterHistoryOrder($form);
+	});
+
+
 });

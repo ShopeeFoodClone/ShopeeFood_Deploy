@@ -131,12 +131,14 @@
 	var _cart = {
 		FilterHistoryOrder: function ($form) {
 			var status = $form.find("#slc-status option:selected").val();
+			var sort = $form.find("#slc-sort option:selected").val();
 			var startDate = $form.find("#startDate").val();
 			var endDate = $form.find("#endDate").val();
 			return {
 				Status: status,
 				StartDate: startDate,
-				EndDate: endDate
+				EndDate: endDate,
+				Sort:sort 
 			}
 		}
 	};
