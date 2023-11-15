@@ -1,5 +1,4 @@
 ﻿$(function () {
-
 	$("#searchProduct").on("input", function () {
 		var $divProducts = $("#partial-products");
 		var searchText = $(this).val();
@@ -34,6 +33,13 @@
 			$("#container-cart").on("click", "#btnClearCart", function () {
 				_callAjax.cart.ClearCart();
 			});
+			$("#container-cart").on("click", ".btn-remove-details-cart", function () {
+				var idProduct = $(this).attr('data-id-product')
+				_callAjax.cart.RemoveDetailsCart(idProduct, function (res) {
+					$("#container-cart").html(res);
+					BuildInputPlusMinus();
+				});
+			});
 			$(".btn-add-to-cart").on("click", function () {
 				var id_product = $(this).attr("data-id-product");
 				_callAjax.cart.AddToCart(id_product, function (res) {
@@ -49,3 +55,27 @@
 		}
 	}
 });
+
+function BuildInputPlusMinus() {
+	/*For total*/
+	$(".detail-cart").each(function () {
+		$(this).on("input", ".quantity", function () {
+			var price = +$(".price").data("price");
+			var quantity = +$(this).val();
+			$("#total").text("$" + price * quantity);
+		})
+
+		var $buttonPlus = $(this).find('.increase-btn');
+		var $buttonMin = $(this).find('.decrease-btn');
+		var $quantity = $(this).find('.quantity');
+
+		/*For plus and minus buttons*/
+		$buttonPlus.click(function () {
+			$quantity.val(parseInt($quantity.val()) + 1).trigger('input');
+		});
+
+		$buttonMin.click(function () {
+			$quantity.val(Math.max(parseInt($quantity.val()) - 1, 1)).trigger('input');
+		});
+	});
+}

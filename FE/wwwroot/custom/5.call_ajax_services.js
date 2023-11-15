@@ -430,7 +430,7 @@
 			var configAjax = {
 				url: '/Cart/AddProductToCart?idProduct=' + idProduct,
 				type: 'POST',
-				dataType:'text',
+				dataType: 'text',
 				beforeSend: function () { },
 				complete: function () { },
 				success: function (res) {
@@ -450,7 +450,7 @@
 			var configAjax = {
 				url: '/Cart/UpdateDetailsCart',
 				type: 'POST',
-				dataType:'text',
+				dataType: 'text',
 				beforeSend: function () { },
 				complete: function () { },
 				data: JSON.stringify(request),
@@ -520,6 +520,22 @@
 							RedirectToUrl(res);
 						}, 1500);
 					}
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		RemoveDetailsCart: function (idProduct, callBack) {
+			var configAjax = {
+				url: '/Cart/RemoveProductFromCart?idProduct=' + idProduct,
+				type: 'POST',
+				dataType: 'text',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (res) {
+					$("#toastAddToCart").find("#toastContent").html("Đã xóa khỏi giỏ hàng");
+					$("#toastAddToCart").toast("show");
+					callBack(res);
 				}
 			}
 			var callAjax = new AjaxOption(configAjax);
