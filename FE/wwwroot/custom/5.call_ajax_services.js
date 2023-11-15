@@ -373,7 +373,7 @@
 					if (!data.isSuccess) {
 						ShowPopupFail(data.message);
 					} else {
-						ShowPopupSuccess(data.message);
+						ShowPopupSuccess(data.data);
 						setTimeout(function () {
 							RedirectToUrl(res);
 						}, 2000);
@@ -394,7 +394,7 @@
 					if (!data.isSuccess) {
 						ShowPopupFail(data.message);
 					} else {
-						ShowPopupSuccess(data.message);
+						ShowPopupSuccess(data.data);
 						setTimeout(function () {
 							RedirectToUrl(res);
 						}, 2000);
@@ -476,7 +476,8 @@
 						ShowPopupFail(data.message);
 					}
 					else {
-						ShowPopupSuccess(data.message);
+						console.log(data)
+						ShowPopupSuccess(data.data);
 						setTimeout(function () {
 							RedirectToUrl(res);
 						}, 2000);
