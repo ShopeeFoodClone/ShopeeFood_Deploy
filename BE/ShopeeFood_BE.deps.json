@@ -121,6 +121,14 @@
           }
         }
       },
+      "Diacritics/3.3.18": {
+        "runtime": {
+          "lib/netstandard2.1/Diacritics.dll": {
+            "assemblyVersion": "3.3.18.0",
+            "fileVersion": "3.3.18.0"
+          }
+        }
+      },
       "Facebook/7.0.6": {
         "runtime": {
           "lib/net45/Facebook.dll": {
@@ -868,6 +876,7 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "BCrypt.Net-Next": "4.0.3",
           "CommandLineParser": "2.9.1",
+          "Diacritics": "3.3.18",
           "Facebook": "7.0.6",
           "Google.Apis.Auth": "1.63.0",
           "MailKit": "4.2.0",
@@ -961,6 +970,13 @@
       "sha512": "sha512-OE0sl1/sQ37bjVsPKKtwQlWDgqaxWgtme3xZz7JssWUzg5JpMIyHgCTY9MVMxOg48fJ1AgGT3tgdH5m/kQ5xhA==",
       "path": "commandlineparser/2.9.1",
       "hashPath": "commandlineparser.2.9.1.nupkg.sha512"
+    },
+    "Diacritics/3.3.18": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4vUQ4G5s1omlHnYVp6LuYPjiGaui/opyxjQ+jap01D1yJ4kHwkBiFyp+mq39NMcpMmUWpbodQThN27ybrInJQA==",
+      "path": "diacritics/3.3.18",
+      "hashPath": "diacritics.3.3.18.nupkg.sha512"
     },
     "Facebook/7.0.6": {
       "type": "package",
