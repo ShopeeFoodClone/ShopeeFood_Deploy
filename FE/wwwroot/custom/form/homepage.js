@@ -102,11 +102,20 @@
 			$('#see-more-stores').attr("data-page-index", 2);
 		});
 	});
-	$("#search-text").on("input", function () {
+
+	$('#search-text').on('change', function () {
 		var $sectionRecommendSearch = $('#block-recommend');
-		_callAjax.homePage.SearchBox($(this).val(), function (res) {
-			$sectionRecommendSearch.html(res);
-		});
+		SearchStore($sectionRecommendSearch,$(this).val());
+	});
+
+	$('#search-text').on('input', function () {
+		$(this).data('unsaved', true);
+		clearTimeout(this.delayer);
+
+		var context = this;
+		this.delayer = setTimeout(function () {
+			jQuery(context).trigger('change');
+		}, 1000);
 	});
 	$("#formSearchHomePage").submit(function (e) {
 		e.preventDefault();
@@ -114,3 +123,11 @@
 		_callAjax.store.Search(searchText);
 	})
 });
+
+
+function SearchStore($box,key) {
+	var $sectionRecommendSearch = $box;
+	_callAjax.homePage.SearchBox(key, function (res) {
+		$sectionRecommendSearch.html(res);
+	});
+}
