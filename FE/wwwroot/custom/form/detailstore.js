@@ -20,6 +20,8 @@
 	else {
 		var $isLogin = $("#isLogin");
 		if ($isLogin.length > 0) {
+			BuildInputPlusMinus();
+
 			$("#container-cart").on("input", ".quantity", function () {
 				var quantity = $(this).val();
 				var idProduct = $(this).attr("data-id-product")
@@ -36,21 +38,25 @@
 			$("#container-cart").on("click", ".btn-remove-details-cart", function () {
 				var idProduct = $(this).attr('data-id-product')
 				_callAjax.cart.RemoveDetailsCart(idProduct, function (res) {
+					$("#toastAddToCart").find("#toastContent").html("Đã xóa khỏi giỏ hàng");
+					$("#toastAddToCart").toast("show");
 					$("#container-cart").html(res);
 					BuildInputPlusMinus();
 				});
 			});
-			$(".btn-add-to-cart").on("click", function () {
+			
+			$("#partial-products").on("click",".btn-add-to-cart", function () {
 				var id_product = $(this).attr("data-id-product");
 				_callAjax.cart.AddToCart(id_product, function (res) {
-					console.log(res);
+					$("#toastAddToCart").find("#toastContent").html("Đã thêm vào giỏ hàng");
+					$("#toastAddToCart").toast("show");
 					$("#container-cart").html(res);
 					BuildInputPlusMinus();
 				});
 			});
 		}
 		else {
-			$(".btn-add-to-cart").on("click", function () {
+			$("#partial-products").on("click", ".btn-add-to-cart", function () {
 				ShowPopupFail("Vui lòng đăng nhập để đặt hàng", "Thông Báo");
 			});
 		}

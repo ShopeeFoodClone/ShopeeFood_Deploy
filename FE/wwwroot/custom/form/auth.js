@@ -211,11 +211,11 @@ function RegexPassword(password) {
 
 // Login google
 var googleUser = {};
-var startApp = function () {
+var startApp = function (clientId) {
 	gapi.load('auth2', function () {
 		// Retrieve the singleton for the GoogleAuth library and set up the client.
 		auth2 = gapi.auth2.init({
-			client_id: '813757043451-ql8262n6g5dh6qm8n1kum5hbr37knk92',
+			client_id: clientId,
 			scope: "email",
 			plugin_name: 'ShopeeFoodClone'
 		});

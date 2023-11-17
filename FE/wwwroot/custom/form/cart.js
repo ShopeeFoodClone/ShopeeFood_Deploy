@@ -9,16 +9,18 @@
 			_callAjax.cart.UpdateDetailsCart(idProduct, quantity);
 		}
 	});
-
-	$("#formConfirmOrder").submit(function (e) {
-		e.preventDefault();
-		var phoneNumber = $(this).find("#phoneNumber").val();
-		var deliveryAddress = $(this).find("#address").val();
+	$(".btn-paynow").on("click", function () {
+		var phoneNumber = $("#formConfirmOrder").find("#phoneNumber").val();
+		var deliveryAddress = $("#formConfirmOrder").find("#address").val();
 		if (phoneNumber == "" || deliveryAddress == "") {
 			ShowPopupFail("Vui lòng nhập thông tin đầy đủ");
 			return;
 		}
-		_callAjax.cart.Order(phoneNumber, deliveryAddress);
+		var paymentType = $(this).attr("data-payment-type");
+		_callAjax.cart.Order(phoneNumber, deliveryAddress, paymentType);
+	});
+	$("#formConfirmOrder").submit(function (e) {
+		e.preventDefault();
 	})
 
 	$("#btn-statistic").on("click", function () {
@@ -34,6 +36,4 @@
 		var $form = $("#statistic-filter");
 		_callAjax.cart.FilterHistoryOrder($form);
 	});
-
-
 });

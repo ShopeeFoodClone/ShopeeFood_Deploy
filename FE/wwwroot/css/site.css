@@ -1,3 +1,8 @@
+html {
+	position: relative;
+	font-family: 'Roboto', sans-serif;
+}
+
 body::-webkit-scrollbar {
 	display: none;
 }
@@ -5,6 +10,7 @@ body::-webkit-scrollbar {
 :root {
 	--color-shopee: #ee4d2d;
 }
+
 .pin-code {
 	padding: 0;
 	display: flex;
@@ -32,6 +38,7 @@ body::-webkit-scrollbar {
 			-webkit-appearance: none;
 			margin: 0;
 		}
+
 .loading {
 	z-index: 9999;
 	position: fixed;
@@ -171,10 +178,6 @@ footer {
 	background-color: #f2f2f2;
 }
 
-html {
-	position: relative;
-}
-
 body {
 	margin-bottom: 60px;
 }
@@ -241,12 +244,13 @@ select:focus {
 }
 
 .btn-shopee {
+	background-color: var(--color-shopee) !important;
 	border: 2px solid var(--color-shopee);
-	color: var(--color-shopee) !important;
+	color: white !important;
 }
 
 	.btn-shopee:hover {
-		background-color: var(--color-shopee);
+		background-color: rgba(238, 77, 45,0.8) !important;
 		color: white !important;
 	}
 
@@ -434,10 +438,12 @@ footer {
 	.dropdown-filter .dropdown-filter-item {
 		flex: 1 0 41% !important; /* explanation below */
 	}
+
 	.pin-code input {
 		width: 35px;
 		height: 35px;
 	}
+
 	#left {
 		padding-top: 150px;
 		padding-bottom: 50px;
@@ -638,3 +644,13 @@ input[type = password]::-ms-clear {
 .validate {
 	display: none;
 }
+
+.btn-momo {
+	background-color: #af2070;
+	color: white;
+}
+
+	.btn-momo:hover {
+		background-color: rgba(175, 32, 112,0.8);
+		color: white;
+	}

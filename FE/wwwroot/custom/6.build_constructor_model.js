@@ -30,10 +30,12 @@
 	var _homePage = {
 		MoreDeals: function ($btn) {
 			var pageIndex = $btn.attr("data-page-index");
+			var idCategoryConsumpType = $btn.attr("data-id-category-consump");
 			return {
 				PageIndex: pageIndex,
 				PageSize: 9,
-				IdCity: localStorage.getItem("data-id-city")
+				IdCity: localStorage.getItem("data-id-city"),
+				IdCategoryConsumpType: idCategoryConsumpType
 			}
 		},
 		MoreCollections: function ($btn) {
@@ -48,10 +50,12 @@
 		MoreStoreCommons: function ($btn, idDistrict) {
 			var pageIndex = $btn.attr("data-page-index");
 			var districts = idDistrict == 'ALL' ? [] : [idDistrict];
+			var idCategoryConsumpType = $btn.attr("data-id-category-consump");
 			return {
 				PageIndex: pageIndex,
 				PageSize: 6,
-				Districts: districts
+				Districts: districts,
+				IdCategoryConsumpType: idCategoryConsumpType
 			}
 		},
 		SelectDistrict: function (idDistrict) {
@@ -138,7 +142,7 @@
 				Status: status,
 				StartDate: startDate,
 				EndDate: endDate,
-				Sort:sort 
+				Sort: sort
 			}
 		}
 	};

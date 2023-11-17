@@ -434,8 +434,6 @@
 				beforeSend: function () { },
 				complete: function () { },
 				success: function (res) {
-					$("#toastAddToCart").find("#toastContent").html("Đã thêm vào giỏ hàng");
-					$("#toastAddToCart").toast("show");
 					callBack(res);
 				}
 			}
@@ -461,10 +459,11 @@
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
 		},
-		Order: function (phoneNumber, deliveryAddress) {
+		Order: function (phoneNumber, deliveryAddress, paymentType) {
 			var request = {
 				PhoneNumber: phoneNumber,
-				DeliveryAddress: deliveryAddress
+				DeliveryAddress: deliveryAddress,
+				PaymentType: paymentType
 			}
 			var configAjax = {
 				url: '/Cart/Order',
@@ -534,8 +533,6 @@
 				beforeSend: function () { },
 				complete: function () { },
 				success: function (res) {
-					$("#toastAddToCart").find("#toastContent").html("Đã xóa khỏi giỏ hàng");
-					$("#toastAddToCart").toast("show");
 					callBack(res);
 				}
 			}
