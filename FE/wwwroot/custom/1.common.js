@@ -98,16 +98,32 @@ $(function () {
 		var searchText = $(this).find("#searchText").val();
 		_callAjax.store.Search(searchText);
 	})
+
+	var scrollableElement = document.body; //document.getElementById('scrollableElement');
+
+	scrollableElement.addEventListener('wheel', checkScrollDirection);
+
+	function checkScrollDirection(event) {
+		if (checkScrollDirectionIsUp(event)) {
+			$("header").addClass("header-sticky")
+		} else {
+			$("header").removeClass("header-sticky")
+		}
+	}
+	function checkScrollDirectionIsUp(event) {
+		if (event.wheelDelta) {
+			return event.wheelDelta > 0;
+		}
+		return event.deltaY < 0;
+	}
 	// handle scroll down
 	var scrollVal = 0;
 	$(document).ready(function () {
 		$(window).scroll(function () {
 			var x = $(this).scrollTop();
 			if (x - 50 > scrollVal) {
-				$("header").removeClass("header-sticky")
 				$("#back-top").css("opacity", "1");
 			} else {
-				$("header").addClass("header-sticky")
 				$("#back-top").css("opacity", "0");
 			}
 		});
