@@ -99,17 +99,23 @@ $(function () {
 		_callAjax.store.Search(searchText);
 	})
 
-	var scrollableElement = document.body; //document.getElementById('scrollableElement');
+	var scrollableElement = document.body; // document.getElementById('scrollableElement');
+	var header = $("header");
 
-	scrollableElement.addEventListener('wheel', checkScrollDirection);
+	scrollableElement.addEventListener('wheel', function (event) {
+		// Kiểm tra xem sự kiện scroll có xuất phát từ dropdown list hay không
+		var isDropdownScroll = header.has(event.target).length > 0;
 
-	function checkScrollDirection(event) {
-		if (checkScrollDirectionIsUp(event)) {
-			$("header").addClass("header-sticky")
-		} else {
-			$("header").removeClass("header-sticky")
+		if (!isDropdownScroll) {
+			var isScrollingUp = checkScrollDirectionIsUp(event);
+			if (isScrollingUp) {
+				header.addClass("header-sticky");
+			} else {
+				header.removeClass("header-sticky");
+			}
 		}
-	}
+	});
+
 	function checkScrollDirectionIsUp(event) {
 		if (event.wheelDelta) {
 			return event.wheelDelta > 0;
