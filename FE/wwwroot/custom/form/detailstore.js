@@ -30,7 +30,6 @@
 		var $isLogin = $("#isLogin");
 		if ($isLogin.length > 0) {
 			BuildInputPlusMinus();
-
 			$("#container-cart").on("input", ".quantity", function () {
 				var quantity = $(this).val();
 				var idProduct = $(this).attr("data-id-product")
@@ -66,7 +65,7 @@
 		}
 		else {
 			$("#partial-products").on("click", ".btn-add-to-cart", function () {
-				ShowPopupFail("Vui lòng đăng nhập để đặt hàng", "Thông Báo");
+				ShowPopupFail("Vui lòng đăng nhập để đặt hàng.<br/> <a href='/auth/login'>Đăng nhâp ngay</a>", "Thông Báo");
 			});
 		}
 	}
