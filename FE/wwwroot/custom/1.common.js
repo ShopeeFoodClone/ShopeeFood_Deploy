@@ -102,12 +102,15 @@ $(function () {
 	var scrollableElement = document.body; // document.getElementById('scrollableElement');
 	var header = $("header");
 	var recommend = $("#recommend");
+	var scrollChild = $("#scrollChild");
 
 	scrollableElement.addEventListener('wheel', function (event) {
-		// Kiểm tra xem sự kiện scroll có xuất phát từ dropdown list hay không
-		var isDropdownScroll = header.has(event.target).length > 0 || recommend.has(event.target).length > 0;
+		// Kiểm tra xem sự kiện scroll có xuất phát từ các phần tử cụ thể hay không
+		var isHeaderScroll = header.is(event.target) || header.has(event.target).length > 0;
+		var isRecommendScroll = recommend.is(event.target) || recommend.has(event.target).length > 0;
+		var isScrollChildScroll = scrollChild.is(event.target) || scrollChild.has(event.target).length > 0;
 
-		if (!isDropdownScroll) {
+		if (!isHeaderScroll && !isRecommendScroll && !isScrollChildScroll) {
 			var isScrollingUp = checkScrollDirectionIsUp(event);
 			if (isScrollingUp) {
 				header.addClass("header-sticky");

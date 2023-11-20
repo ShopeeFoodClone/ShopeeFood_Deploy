@@ -191,7 +191,7 @@ select:focus {
 }
 
 #select-city {
-	position:relative;
+	position: relative;
 }
 
 	#select-city > a {
@@ -442,12 +442,11 @@ footer {
 	.dropdown-filter .dropdown-filter-item {
 		flex: 1 0 41% !important; /* explanation below */
 	}
+
 	.pin-code input {
 		width: 35px;
 		height: 35px;
 	}
-
-	
 
 	.dropdown-filter {
 		right: -400px;
@@ -458,6 +457,7 @@ footer {
 		inset: 0px auto auto -50px !important;
 	}
 }
+
 @media (max-width: 1395px) {
 	#left {
 		padding-top: 150px;
@@ -576,7 +576,7 @@ footer {
 		left: 0;
 		width: 100%;
 		top: 100%;
-		padding:20px 20px;
+		padding: 20px 20px;
 		overflow-y: scroll;
 		height: max-content;
 		max-height: 300px;
@@ -635,7 +635,7 @@ footer {
 	position: absolute;
 	right: 10px;
 	opacity: 0.6;
-	z-index: 10;
+	z-index: 2;
 	cursor: pointer;
 	height: 20px;
 	width: 20px;
