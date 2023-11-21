@@ -52,8 +52,8 @@
 					BuildInputPlusMinus();
 				});
 			});
-			
-			$("#partial-products").on("click",".btn-add-to-cart", function () {
+
+			$("#partial-products").on("click", ".btn-add-to-cart", function () {
 				var id_product = $(this).attr("data-id-product");
 				_callAjax.cart.AddToCart(id_product, function (res) {
 					$("#toastAddToCart").find("#toastContent").html("Đã thêm vào giỏ hàng");

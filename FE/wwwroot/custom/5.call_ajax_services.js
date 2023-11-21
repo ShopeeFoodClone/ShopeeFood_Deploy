@@ -3,14 +3,12 @@
 	var _auth = {
 		Login: function ($formLogin) {
 			var request = _constructorCommon.auth.Login($formLogin);
-			console.log(request);
 			var configAjax = {
 				url: '/Auth/Login',
 				type: 'POST',
 				data: JSON.stringify(request),
 				success: function (res) {
 					var data = res.data ?? res;
-					console.log(data);
 					if (!data.isSuccess) {
 						ShowPopupFail(data.message);
 					} else {
@@ -46,7 +44,6 @@
 				type: 'POST',
 				success: function (res) {
 					var data = res.data ?? res;
-					console.log(data);
 					if (!data.isSuccess) {
 						ShowPopupFail(data.message);
 					} else {
@@ -68,7 +65,6 @@
 				complete: function () { },
 				success: function (res) {
 					var data = res.data ?? res;
-					console.log(data);
 					if (!data.isSuccess) {
 						ShowPopupFail(data.message);
 					} else {
@@ -200,7 +196,6 @@
 				type: 'POST',
 				data: JSON.stringify(request),
 				success: function (res) {
-					console.log(res)
 					if (!res.isSuccess) {
 					} else {
 						$btn.attr("data-page-index", parseInt(request.PageIndex) + 1);
@@ -218,7 +213,6 @@
 				type: 'POST',
 				data: JSON.stringify(request),
 				success: function (res) {
-					console.log(res)
 					if (!res.isSuccess) {
 					} else {
 						$btn.attr("data-page-index", parseInt(request.PageIndex) + 1);
@@ -238,7 +232,6 @@
 				type: 'POST',
 				data: JSON.stringify(request),
 				success: function (res) {
-					console.log(res)
 					if (!res.isSuccess) {
 					} else {
 						$btn.attr("data-page-index", parseInt(request.PageIndex) + 1);
@@ -257,7 +250,6 @@
 				dataType: 'text',
 				data: JSON.stringify(request),
 				success: function (res) {
-					console.log(res)
 					callBack(res)
 				}
 			}
@@ -475,7 +467,6 @@
 						ShowPopupFail(data.message);
 					}
 					else {
-						console.log(data)
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
 							RedirectToUrl(res);
@@ -488,7 +479,6 @@
 		},
 		FilterHistoryOrder: function ($form) {
 			var request = _constructorCommon.cart.FilterHistoryOrder($form);
-			console.log(request);
 			var configAjax = {
 				url: '/Cart/FilterHistoryOrder',
 				type: 'POST',

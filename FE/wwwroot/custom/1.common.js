@@ -45,6 +45,20 @@ function RemoveLoading() {
 	});
 }
 $(function () {
+	// Handle scroll direction
+	var lastScrollTop = 0;
+	var header = $("header");
+	$(window).scroll(function () {
+		var st = window.pageYOffset || document.documentElement.scrollTop;
+		if (st > lastScrollTop) { // Scroll down
+			header.removeClass("header-sticky");
+		} else if (st < lastScrollTop) { // scroll top
+			header.addClass("header-sticky");
+		}
+		lastScrollTop = st <= 0 ? 0 : st;
+	});
+
+	// Handle provinces select
 	if ($(".slc-cities").length > 0) {
 		var $cities = $(".slc-cities");
 		_callAjax.common.LoadCities(function (data) {
@@ -99,53 +113,34 @@ $(function () {
 		_callAjax.store.Search(searchText);
 	})
 
-	var scrollableElement = document.body; // document.getElementById('scrollableElement');
-	var header = $("header");
-	var recommend = $("#recommend");
-	var scrollChild = $("#scrollChild");
 
-	scrollableElement.addEventListener('wheel', function (event) {
-		// Kiểm tra xem sự kiện scroll có xuất phát từ các phần tử cụ thể hay không
-		var isHeaderScroll = header.is(event.target) || header.has(event.target).length > 0;
-		var isRecommendScroll = recommend.is(event.target) || recommend.has(event.target).length > 0;
-		var isScrollChildScroll = scrollChild.is(event.target) || scrollChild.has(event.target).length > 0;
 
-		if (!isHeaderScroll && !isRecommendScroll && !isScrollChildScroll) {
-			var isScrollingUp = checkScrollDirectionIsUp(event);
-			if (isScrollingUp) {
-				header.addClass("header-sticky");
-			} else {
-				header.removeClass("header-sticky");
-			}
-		}
-	});
-
-	function checkScrollDirectionIsUp(event) {
-		if (event.wheelDelta) {
-			return event.wheelDelta > 0;
-		}
-		return event.deltaY < 0;
-	}
 	// handle scroll down
 	var scrollVal = 0;
-	$(document).ready(function () {
-		$(window).scroll(function () {
-			var x = $(this).scrollTop();
-			if (x - 50 > scrollVal) {
-				$("#back-top").css("opacity", "1");
-			} else {
-				$("#back-top").css("opacity", "0");
-			}
-		});
-		$("#back-top").click(function () {
-			$("html, body").animate({
-				scrollTop: 0,
-			},
-				0
-			);
-		});
+	$(window).scroll(function () {
+		var x = $(this).scrollTop();
+		if (x - 50 > scrollVal) {
+			$("#back-top").css("opacity", "1");
+		} else {
+			$("#back-top").css("opacity", "0");
+		}
+	});
+	$("#back-top").click(function () {
+		$("html, body").animate({
+			scrollTop: 0,
+		},
+			0
+		);
 	});
 });
 function HideAllModal() {
 	$(".modal").modal("hide");
+}
+
+function HandleScrollBody() {
+
+}
+
+function checkScrollDirectionIsUp() {
+
 }
