@@ -102,19 +102,17 @@
 			$('#see-more-stores').attr("data-page-index", 2);
 		});
 	});
-
+	// Search store recommend
 	$('#search-text').on('change', function () {
 		var $sectionRecommendSearch = $('#block-recommend');
 		SearchStore($sectionRecommendSearch,$(this).val());
 	});
-
 	$('#search-text').on('input', function () {
 		$(this).data('unsaved', true);
 		clearTimeout(this.delayer);
-
 		var context = this;
 		this.delayer = setTimeout(function () {
-			jQuery(context).trigger('change');
+			$(context).trigger('change');
 		}, 1000);
 	});
 	$("#formSearchHomePage").submit(function (e) {

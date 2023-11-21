@@ -1,18 +1,17 @@
 ﻿$(function () {
+	// Search product
 	$('#searchProduct').on('change', function () {
 		var $divProducts = $("#partial-products");
 		var searchText = $(this).val();
 		SearchProduct($divProducts, searchText);
 	});
-
 	$('#searchProduct').on('input', function () {
 		$(this).data('unsaved', true);
 		clearTimeout(this.delayer);
-
 		var context = this;
 		this.delayer = setTimeout(function () {
 			jQuery(context).trigger('change');
-		}, 500);
+		}, 1000);
 	});
 
 	var $check = $("#closed");

@@ -23,6 +23,24 @@
 	if ($formLogin.length > 0) {
 		$formLogin.on('submit', function (e) {
 			e.preventDefault();
+			var $validate_password = $formLogin.find("#validate-password");
+			var $validate_user = $formLogin.find("#validate-username");
+			var $username = $formLogin.find("#Username");
+			var $password = $formLogin.find("#Password");
+			if ($username.val() == '') {
+				$validate_user.html("Vui lòng nhập tài khoản");
+				$username.focus();
+				$validate_user.show();
+				return;
+			}
+			$validate_user.hide();
+			if ($password.val() == '') {
+				$validate_password.html("Vui lòng nhập mật khẩu");
+				$password.focus();
+				$validate_password.show();
+				return;
+			}
+			$validate_password.hide();
 			_callAjax.auth.Login($(this));
 		})
 	}
