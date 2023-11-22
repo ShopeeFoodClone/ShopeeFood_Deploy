@@ -113,8 +113,6 @@ $(function () {
 		_callAjax.store.Search(searchText);
 	})
 
-
-
 	// handle scroll down
 	var scrollVal = 0;
 	$(window).scroll(function () {
@@ -135,12 +133,4 @@ $(function () {
 });
 function HideAllModal() {
 	$(".modal").modal("hide");
-}
-
-function HandleScrollBody() {
-
-}
-
-function checkScrollDirectionIsUp() {
-
 }

@@ -235,7 +235,7 @@ select:focus {
 }
 
 .header .navbar-nav .nav-item .nav-link {
-	width: 100px;
+	width: px;
 }
 
 .header .navbar-nav .nav-item a:hover {
@@ -452,10 +452,6 @@ footer {
 		right: -400px;
 		width: 340px;
 	}
-
-	.dropdown-menu {
-		inset: 0px auto auto -50px !important;
-	}
 }
 
 @media (max-width: 1395px) {
@@ -658,4 +654,12 @@ input[type = password]::-ms-clear {
 	.btn-momo:hover {
 		background-color: rgba(175, 32, 112,0.8);
 		color: white;
+	}
+
+.overflow-x-scroll {
+	overflow-x: scroll;
+}
+
+	.overflow-x-scroll::-webkit-scrollbar {
+		display: none;
 	}
