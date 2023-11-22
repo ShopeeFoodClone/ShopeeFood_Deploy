@@ -482,6 +482,8 @@
 			var configAjax = {
 				url: '/Cart/FilterHistoryOrder',
 				type: 'POST',
+				beforeSend: function () { },
+				complete: function () { },
 				data: JSON.stringify(request),
 				success: function (res) {
 					var data = res.data ?? res;
@@ -500,6 +502,8 @@
 			var configAjax = {
 				url: '/Cart/ClearCart',
 				type: 'POST',
+				beforeSend: function () { },
+				complete: function () { },
 				success: function (res) {
 					var data = res.data ?? res;
 					if (!data.isSuccess) {

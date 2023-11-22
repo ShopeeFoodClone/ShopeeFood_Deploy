@@ -419,6 +419,10 @@ footer {
 	background-color: #cf2127 !important;
 }
 
+.item-filter {
+	margin-right: 10px;
+}
+
 .dropdown-filter {
 	display: flex;
 	flex-wrap: wrap !important;
