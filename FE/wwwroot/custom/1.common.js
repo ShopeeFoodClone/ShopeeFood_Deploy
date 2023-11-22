@@ -64,17 +64,23 @@ $(function () {
 		_callAjax.common.LoadCities(function (data) {
 			$cities.html(data);
 		});
+
 		$cities.on("change", function () {
 			$districts = $(".slc-districts");
 			var idCity = $cities.find("option:selected").val();
 			_callAjax.common.LoadDistricts(idCity, function (data) {
 				$districts.html(data);
-			});
-			$districts.on("change", function () {
-				$wards = $(".slc-wards");
-				var idDistricts = $districts.find("option:selected").val();
-				_callAjax.common.LoadWards(idDistricts, function (data) {
-					$wards.html(data);
+
+				// Remove existing "change" event handlers on districts
+				$districts.off("change");
+
+				$districts.on("change", function () {
+					console.log("district call api");
+					$wards = $(".slc-wards");
+					var idDistricts = $districts.find("option:selected").val();
+					_callAjax.common.LoadWards(idDistricts, function (data) {
+						$wards.html(data);
+					});
 				});
 			});
 		});

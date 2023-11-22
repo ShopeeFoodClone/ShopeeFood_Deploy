@@ -67,8 +67,9 @@
 					var data = res.data ?? res;
 					if (!data.isSuccess) {
 						ShowPopupFail(data.message);
-					} else {
-					}
+						return false
+					} 
+					return true;
 				}
 			}
 			var callAjax = new AjaxOption(configAjax);

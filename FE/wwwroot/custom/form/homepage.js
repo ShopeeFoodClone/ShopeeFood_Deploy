@@ -15,7 +15,7 @@
 									<p class="mb-0 small card-text text-black">${e.address}</p>
 								</div>
 							</div>
-							<div class="card-footer d-flex align-items-center">
+							<div class="card-footer d-flex align-items-center p-2">
 								<i class="fa-solid fa-tag"></i>
 								<p class="ms-2 small mb-0">${e.tagDeals}</p>
 							</div>

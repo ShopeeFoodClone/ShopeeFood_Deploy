@@ -1,5 +1,15 @@
 ﻿$(function () {
-	_configDatePicker.initDateMinus100($("#dob"));
+	$("#editAddress").change(function () {
+		if ($(this).is(":checked") == true) {
+			$("#front").addClass("d-flex");
+			$("#back").hide();
+		}
+		else {
+			$("#front").removeClass("d-flex");
+			$("#back").show();
+		}
+	});
+	 _configDatePicker.initDateMinus100($("#dob"));
 	// Button show hide password
 	$(".btn-show-hide-password").on("click", function () {
 		const $btn = $(this);

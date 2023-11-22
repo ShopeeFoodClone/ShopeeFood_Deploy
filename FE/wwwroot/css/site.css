@@ -441,22 +441,7 @@ main {
 
 
 
-@media (max-width: 1395px) {
-	#right {
-		padding-top: 0;
-	}
-	#left {
-		padding-top: 150px;
-		padding-bottom: 50px;
-		position: relative;
-	}
-	.dropdown-filter {
-		width: 500px;
-	}
-	#controlsAccount .dropdown-menu {
-		left: -30px;
-	}
-}
+
 @media (max-width: 800px) {
 	.dropdown-filter .dropdown-filter-item {
 		flex: 1 0 41% !important; /* explanation below */
@@ -473,6 +458,25 @@ main {
 
 	#controlsAccount .dropdown-menu {
 		left: -20px;
+	}
+}
+@media (max-width: 1395px) {
+	#right {
+		padding-top: 0;
+	}
+
+	#left {
+		padding-top: 150px;
+		padding-bottom: 50px;
+		position: relative;
+	}
+
+	.dropdown-filter {
+		width: 500px;
+	}
+
+	#controlsAccount .dropdown-menu {
+		left: -30px;
 	}
 }
 .page-link:focus {
@@ -534,9 +538,9 @@ main {
 }
 
 	.row-item .row-item-img {
-		height: 70px;
+		height: 150px;
 		object-fit: cover;
-		width: 70px;
+		width: 150px;
 	}
 
 .text-blue-dark {
