@@ -46,17 +46,17 @@ function RemoveLoading() {
 }
 $(function () {
 	// Handle scroll direction
-	var lastScrollTop = 0;
-	var header = $("header");
-	$(window).scroll(function () {
-		var st = window.pageYOffset || document.documentElement.scrollTop;
-		if (st > lastScrollTop) { // Scroll down
-			header.removeClass("header-sticky");
-		} else if (st < lastScrollTop) { // scroll top
-			header.addClass("header-sticky");
-		}
-		lastScrollTop = st <= 0 ? 0 : st;
-	});
+	//var lastScrollTop = 0;
+	//var header = $("header");
+	//$(window).scroll(function () {
+	//	var st = window.pageYOffset || document.documentElement.scrollTop;
+	//	if (st > lastScrollTop) { // Scroll down
+	//		header.removeClass("header-sticky");
+	//	} else if (st < lastScrollTop) { // scroll top
+	//		header.addClass("header-sticky");
+	//	}
+	//	lastScrollTop = st <= 0 ? 0 : st;
+	//});
 
 	// Handle provinces select
 	if ($(".slc-cities").length > 0) {
