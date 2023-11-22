@@ -6,7 +6,9 @@ html {
 body::-webkit-scrollbar {
 	display: none;
 }
-
+#scrollChild::-webkit-scrollbar {
+	display: none;
+}
 :root {
 	--color-shopee: #ee4d2d;
 }
@@ -154,6 +156,7 @@ html, body {
 }
 
 .logo-header {
+	max-width:150px;
 	object-fit: cover;
 }
 
@@ -187,7 +190,7 @@ select:focus {
 }
 
 .form-control:focus, .form-select:focus {
-	border-color: var(--color-shopee);
+	border-color: rgb(54,81,98);
 }
 
 #select-city {
@@ -264,7 +267,7 @@ select:focus {
 }
 
 .btn-white {
-	border: 2px solid white;
+	border: 1px solid white;
 	color: white !important;
 }
 
@@ -345,10 +348,7 @@ main {
 	text-decoration: none;
 }
 
-footer {
-	margin-top: 100px;
-	border-top: 0.1rem solid gray;
-}
+
 
 .shopee-footer {
 	margin-top: 70px;
@@ -407,11 +407,11 @@ footer {
 
 .form-check-input:checked {
 	background-color: var(--color-shopee);
-	border-color: var(--color-shopee);
+	border-color: var(--color-shopee) !important;
 }
 
 .form-check-input:focus {
-	border-color: var(--color-shopee);
+	border-color: rgb(54,81,98);
 }
 
 .page-item:hover .page-link {
@@ -419,18 +419,15 @@ footer {
 	background-color: #cf2127 !important;
 }
 
-.item-filter {
-	margin-right: 10px;
-}
 
 .dropdown-filter {
+	width: 700px;
 	display: flex;
 	flex-wrap: wrap !important;
 	border-radius: 10px;
 	gap: 10px;
 	padding: 20px;
 	padding-bottom: 0;
-	width: 700px;
 	overflow-y: scroll;
 	height: max-content;
 	max-height: 200px;
@@ -442,6 +439,24 @@ footer {
 		flex: 1 1 160px !important; /* explanation below */
 	}
 
+
+
+@media (max-width: 1395px) {
+	#right {
+		padding-top: 0;
+	}
+	#left {
+		padding-top: 150px;
+		padding-bottom: 50px;
+		position: relative;
+	}
+	.dropdown-filter {
+		width: 500px;
+	}
+	#controlsAccount .dropdown-menu {
+		left: -30px;
+	}
+}
 @media (max-width: 800px) {
 	.dropdown-filter .dropdown-filter-item {
 		flex: 1 0 41% !important; /* explanation below */
@@ -453,19 +468,13 @@ footer {
 	}
 
 	.dropdown-filter {
-		right: -400px;
-		width: 340px;
+		width: 200px;
+	}
+
+	#controlsAccount .dropdown-menu {
+		left: -20px;
 	}
 }
-
-@media (max-width: 1395px) {
-	#left {
-		padding-top: 150px;
-		padding-bottom: 50px;
-		position: relative;
-	}
-}
-
 .page-link:focus {
 	color: var(--color-shopee);
 }
@@ -522,7 +531,6 @@ footer {
 }
 
 .row-item {
-	padding: 10px 20px;
 }
 
 	.row-item .row-item-img {
@@ -667,3 +675,7 @@ input[type = password]::-ms-clear {
 	.overflow-x-scroll::-webkit-scrollbar {
 		display: none;
 	}
+
+.w-85{
+	width:85%!important;
+}
