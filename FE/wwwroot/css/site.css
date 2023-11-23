@@ -97,7 +97,11 @@ body::-webkit-scrollbar {
 	opacity: 0;
 	transition: all 0.5s ease-in-out;
 }
-
+.avatar {
+	height: 40px;
+	width: 40px;
+	object-fit: cover;
+}
 .preload:before {
 	position: absolute;
 	content: "";
@@ -446,7 +450,10 @@ main {
 	#right {
 		padding-top: 0;
 	}
-
+	.avatar {
+		height: 30px;
+		width: 30px;
+	}
 	#left {
 		padding-top: 150px;
 		padding-bottom: 50px;
