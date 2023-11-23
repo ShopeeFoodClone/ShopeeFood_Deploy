@@ -442,6 +442,26 @@ main {
 
 
 
+@media (max-width: 1395px) {
+	#right {
+		padding-top: 0;
+	}
+
+	#left {
+		padding-top: 150px;
+		padding-bottom: 50px;
+		position: relative;
+	}
+
+	.dropdown-filter {
+		width: 400px;
+	}
+
+	#controlsAccount .dropdown-menu {
+		left: -30px;
+	}
+}
+
 @media (max-width: 800px) {
 	.dropdown-filter .dropdown-filter-item {
 		flex: 1 0 41% !important; /* explanation below */
@@ -458,25 +478,6 @@ main {
 
 	#controlsAccount .dropdown-menu {
 		left: -20px;
-	}
-}
-@media (max-width: 1395px) {
-	#right {
-		padding-top: 0;
-	}
-
-	#left {
-		padding-top: 150px;
-		padding-bottom: 50px;
-		position: relative;
-	}
-
-	.dropdown-filter {
-		width: 500px;
-	}
-
-	#controlsAccount .dropdown-menu {
-		left: -30px;
 	}
 }
 .page-link:focus {
@@ -682,4 +683,8 @@ input[type = password]::-ms-clear {
 
 .w-85{
 	width:85%!important;
+}
+.px-10 {
+	padding-left: 10rem !important;
+	padding-right: 10rem !important;
 }

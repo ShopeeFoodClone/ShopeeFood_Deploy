@@ -64,7 +64,7 @@
 		}
 		else {
 			$("#partial-products").on("click", ".btn-add-to-cart", function () {
-				ShowPopupFail("Vui lòng đăng nhập để đặt hàng.<br/> <a href='/auth/login'>Đăng nhâp ngay</a>", "Thông Báo");
+				ShowPopupFail("Vui lòng đăng nhập để đặt hàng. <a href='/auth/login'>Đăng nhâp ngay</a>", "Thông Báo");
 			});
 		}
 	}

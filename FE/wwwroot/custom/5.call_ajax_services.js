@@ -57,19 +57,18 @@
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
 		},
-		ResendPinCode: function (email) {
+		ResendPinCode: function (email,callBack) {
 			var configAjax = {
 				url: '/Auth/ForgetPassword?email=' + email,
 				type: 'POST',
-				beforeSend: function () { },
-				complete: function () { },
 				success: function (res) {
 					var data = res.data ?? res;
 					if (!data.isSuccess) {
 						ShowPopupFail(data.message);
-						return false
-					} 
-					return true;
+					}
+					else {
+						callBack();
+					}
 				}
 			}
 			var callAjax = new AjaxOption(configAjax);
