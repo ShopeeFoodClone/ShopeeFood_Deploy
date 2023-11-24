@@ -209,6 +209,41 @@
 			});
 		})
 	}
+	$(function () {
+		$("#btnResendEmail").on("click", function () {
+			$form = $("#verification-code")
+			var email = $form.find("#email").val();
+			_callAjax.auth.ResendPinCode(email, function () {
+				let seconds = 30;
+				$("#btnResendEmail").attr("disabled", true);
+				const countdown = setInterval(() => {
+					if (seconds >= 0) {
+						const minutes = Math.floor(seconds / 60);
+						const remainingSeconds = seconds % 60;
+
+						const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+						const displaySeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
+						$("#count-down-pincode").html(displayMinutes + ':' + displaySeconds)
+						seconds--;
+					} else {
+						$("#btnResendEmail").prop("disabled", false);
+						clearInterval(countdown);
+					}
+				}, 1000); // runs every second (1000 milliseconds)
+
+			});
+		});
+		$("#verification-code").submit(function (e) {
+			e.preventDefault();
+			var $otp = $("#otp").find("input[data-verify-num]");
+			var pinCode = "";
+			$otp.each(function () {
+				pinCode += $(this).val()
+			});
+			var userId = $(this).find("#userId").val();
+			_callAjax.auth.ConfirmPinCode(pinCode, userId);
+		});
+	});
 });
 
 function RegexPhonenumber(phoneNumber) {

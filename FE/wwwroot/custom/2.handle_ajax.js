@@ -26,7 +26,7 @@ class AjaxOption {
 		this.error = config.error ??
 			function (XMLHttpRequest, textStatus, errorThrown) {
 				if (textStatus == 'parsererror') {
-					window.location.href = "/Home/index"
+					//window.location.href = "/Home/index"
 				}
 				console.log(XMLHttpRequest, textStatus, errorThrown);
 			};

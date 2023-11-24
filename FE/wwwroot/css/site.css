@@ -6,9 +6,11 @@ html {
 body::-webkit-scrollbar {
 	display: none;
 }
+
 #scrollChild::-webkit-scrollbar {
 	display: none;
 }
+
 :root {
 	--color-shopee: #ee4d2d;
 }
@@ -98,6 +100,12 @@ body::-webkit-scrollbar {
 	transition: all 0.5s ease-in-out;
 }
 
+.avatar {
+	height: 40px;
+	width: 40px;
+	object-fit: cover;
+}
+
 .preload:before {
 	position: absolute;
 	content: "";
@@ -156,7 +164,7 @@ html, body {
 }
 
 .logo-header {
-	max-width:150px;
+	max-width: 150px;
 	object-fit: cover;
 }
 
@@ -348,8 +356,6 @@ main {
 	text-decoration: none;
 }
 
-
-
 .shopee-footer {
 	margin-top: 70px;
 	background-color: white;
@@ -419,9 +425,8 @@ main {
 	background-color: #cf2127 !important;
 }
 
-
 .dropdown-filter {
-	width: 700px;
+	width: 680px;
 	display: flex;
 	flex-wrap: wrap !important;
 	border-radius: 10px;
@@ -439,30 +444,14 @@ main {
 		flex: 1 1 160px !important; /* explanation below */
 	}
 
-
-
-
-@media (max-width: 800px) {
-	.dropdown-filter .dropdown-filter-item {
-		flex: 1 0 41% !important; /* explanation below */
-	}
-
-	.pin-code input {
-		width: 35px;
-		height: 35px;
-	}
-
-	.dropdown-filter {
-		width: 200px;
-	}
-
-	#controlsAccount .dropdown-menu {
-		left: -20px;
-	}
-}
 @media (max-width: 1395px) {
 	#right {
 		padding-top: 0;
+	}
+
+	.avatar {
+		height: 30px;
+		width: 30px;
 	}
 
 	#left {
@@ -472,13 +461,48 @@ main {
 	}
 
 	.dropdown-filter {
-		width: 500px;
+		padding-left: 10px;
+		padding-right: 10px;
+		width: 380px;
 	}
 
 	#controlsAccount .dropdown-menu {
 		left: -30px;
 	}
+
+	.header .navbar-nav .nav-item .active {
+		border-bottom: none !important;
+		color: var(--color-shopee) !important;
+	}
+
+	.header .navbar-nav .nav-item {
+		border-bottom: 1px solid #c7c8c9 !important;
+	}
+
+		.header .navbar-nav .nav-item:last-child {
+			border-bottom: none !important;
+		}
 }
+
+@media (max-width: 800px) {
+	.dropdown-filter .dropdown-filter-item {
+		flex: 1 0 50% !important; /* explanation below */
+	}
+
+	.pin-code input {
+		width: 35px;
+		height: 35px;
+	}
+
+	.dropdown-filter {
+		width: 180px;
+	}
+
+	#controlsAccount .dropdown-menu {
+		left: -20px;
+	}
+}
+
 .page-link:focus {
 	color: var(--color-shopee);
 }
@@ -680,6 +704,11 @@ input[type = password]::-ms-clear {
 		display: none;
 	}
 
-.w-85{
-	width:85%!important;
+.w-85 {
+	width: 85% !important;
+}
+
+.px-10 {
+	padding-left: 10rem !important;
+	padding-right: 10rem !important;
 }
