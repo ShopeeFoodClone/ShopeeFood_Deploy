@@ -712,3 +712,6 @@ input[type = password]::-ms-clear {
 	padding-left: 10rem !important;
 	padding-right: 10rem !important;
 }
+.w-60{
+	width:60%!important;
+}
