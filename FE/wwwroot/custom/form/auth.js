@@ -125,6 +125,23 @@
 				});
 			}
 		})
+		$password_confirm.on("focusout", function () {
+			if ($password_confirm.val() == "") {
+				$validate_confirm_password.hide();
+				isValidPassword = false;
+				return;
+			}
+			if ($password.val() != $password_confirm.val()) {
+				$validate_confirm_password.html("Mật khẩu xác nhận không trùng nhau");
+				$validate_confirm_password.show();
+				isValidPassword = false;
+				return;
+			}
+			else {
+				$validate_confirm_password.hide();
+				isValidPassword = true;
+			}
+		});
 		$password.on("focusout", function () {
 			if ($password.val() == "") {
 				$validate_password.hide();
@@ -230,7 +247,6 @@
 						clearInterval(countdown);
 					}
 				}, 1000); // runs every second (1000 milliseconds)
-
 			});
 		});
 		$("#verification-code").submit(function (e) {
@@ -242,6 +258,16 @@
 			});
 			var userId = $(this).find("#userId").val();
 			_callAjax.auth.ConfirmPinCode(pinCode, userId);
+		});
+		$("#verification-code-register").submit(function (e) {
+			e.preventDefault();
+			var $otp = $("#otp").find("input[data-verify-num]");
+			var pinCode = "";
+			$otp.each(function () {
+				pinCode += $(this).val()
+			});
+			var userId = $(this).find("#userId").val();
+			_callAjax.auth.ConfirmRegister(pinCode, userId);
 		});
 	});
 });
