@@ -105,7 +105,7 @@
 	// Search store recommend
 	$('#search-text').on('change', function () {
 		var $sectionRecommendSearch = $('#block-recommend');
-		SearchStore($sectionRecommendSearch,$(this).val());
+		SearchStore($sectionRecommendSearch, $(this).val());
 	});
 	$('#search-text').on('input', function () {
 		$(this).data('unsaved', true);
@@ -122,8 +122,7 @@
 	})
 });
 
-
-function SearchStore($box,key) {
+function SearchStore($box, key) {
 	var $sectionRecommendSearch = $box;
 	_callAjax.homePage.SearchBox(key, function (res) {
 		$sectionRecommendSearch.html(res);

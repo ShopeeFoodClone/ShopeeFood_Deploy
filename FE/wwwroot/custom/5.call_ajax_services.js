@@ -57,7 +57,7 @@
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
 		},
-		ResendPinCode: function (email,callBack) {
+		ResendPinCode: function (email, callBack) {
 			var configAjax = {
 				url: '/Auth/ForgetPassword?email=' + email,
 				type: 'POST',
@@ -584,7 +584,211 @@
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
 		},
-	}
+	};
+	var _branchStore = {
+		GetBranchStore: function (id, callBack) {
+			var configAjax = {
+				url: urlApi + '/branch-stores/' + id,
+				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					callBack(data);
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		UpdateBranchStore: function ($form) {
+			var formData = new FormData();
+			var image = $form.find('#uploadImageUpdate').val().replace(/C:\\fakepath\\/i, '')
+			var id = $form.find('#id').val();
+			var title = $form.find('#title').val();
+			formData.append('file', $form.find('#uploadImageUpdate')[0].files[0]);
+			formData.append('id', id);
+			formData.append('name', title);
+			formData.append('image', image);
+			var configAjax = {
+				url: '/Admin/BranchStore/UpdateBranchStore',
+				type: 'POST',
+				data: formData,
+				beforeSend: function () { },
+				complete: function () { },
+				contentType: false,
+				processData: false,
+				success: function (res) {
+					var data = res.data ?? res;
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.message);
+					} else {
+						ShowPopupSuccess(data.message);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		CreateBranchStore: function ($form) {
+			var formData = new FormData();
+			var image = $form.find('#uploadImageCreate').val().replace(/C:\\fakepath\\/i, '')
+			var id = $form.find('#id').val();
+			var title = $form.find('#title').val();
+			formData.append('file', $form.find('#uploadImageCreate')[0].files[0]);
+			formData.append('id', id);
+			formData.append('name', title);
+			formData.append('image', image);
+			var configAjax = {
+				url: '/Admin/BranchStore/CreateBranchStore',
+				type: 'POST',
+				data: formData,
+				beforeSend: function () { },
+				complete: function () { },
+				contentType: false,
+				processData: false,
+				success: function (res) {
+					var data = res.data ?? res;
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.message);
+					} else {
+						ShowPopupSuccess(data.message);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		DeleteBranchStore: function (id) {
+			var configAjax = {
+				url: '/Admin/BranchStore/DeleteBranchStore?idBranchStore=' + id,
+				type: 'Get',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (res) {
+					var data = res.data ?? res;
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.message);
+					} else {
+						ShowPopupSuccess(data.message);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		}
+	};
+	var _consumpType = {
+		GetCategoryConsumpType: function (id,callBack) {
+			var configAjax = {
+				url: urlApi + '/categories-consumptype/details/' + id,
+				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					callBack(data);
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		CreateCategoryConsumpType: function ($form) {
+			var idCity = $form.find("#idCity").val();
+			var title = $form.find("#title").val();
+			var request = {
+				IdCity: idCity,
+				Title: title
+			};
+			var configAjax = {
+				url: '/Admin/Category/CreateCategoryConsumptype',
+				type: 'POST',
+				data: JSON.stringify(request),
+				success: function (res) {
+					HideAllModal();
+					var data = res.data ?? res;
+					if (!data.isSuccess) {
+						ShowPopupFail(data.message);
+					} else {
+						ShowPopupSuccess(data.message);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		UpdateCategoryConsumpType: function ($form) {
+			var id = $form.find("#id").val();
+			var idCity = $form.find("#idCity").val();
+			var title = $form.find("#title").val();
+			var request = {
+				Id: id,
+				IdCity: idCity,
+				Title: title
+			};
+			var configAjax = {
+				url: '/Admin/Category/UpdateCategoryConsumptype',
+				type: 'POST',
+				data: JSON.stringify(request),
+				success: function (res) {
+					HideAllModal();
+					var data = res.data ?? res;
+					if (!data.isSuccess) {
+						ShowPopupFail(data.message);
+					} else {
+						ShowPopupSuccess(data.message);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		DeleteCategoryConsumpType: function (id) {
+			var configAjax = {
+				url: '/Admin/Category/DeleteCategoryConsumptype?idCategoryConsumptype=' + id,
+				type: 'Get',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (res) {
+					var data = res.data ?? res;
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.message);
+					} else {
+						ShowPopupSuccess(data.message);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		GetConsumpType: function (id) {
+		},
+		CreateConsumpType: function ($form) {
+		},
+		UpdateConsumpType: function ($form) {
+		},
+		DeleteConsumpType: function (id) {
+		},
+	};
 	return {
 		auth: _auth,
 		homePage: _homePage,
@@ -592,6 +796,8 @@
 		store: _store,
 		information: _information,
 		cart: _cart,
-		common: _common
+		common: _common,
+		branchStore: _branchStore,
+		consumpType: _consumpType
 	};
 })();

@@ -1,6 +1,4 @@
-﻿
-
-function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+﻿function calculateAndDisplayRoute(directionsService, directionsRenderer) {
 	const selectedMode = "DRIVING";
 	const origin2 = "@Model.Store.Address";
 	const destinationA = "@Model.Information.Address";

@@ -1,16 +1,4 @@
-﻿$(".dropdown-item").on("click", function () {
-	var nameCity = $(this).find(".dropdown-item-value").html();
-	var id = $(this).find(".dropdown-item-value").attr("data-id-city");
-	var $dropdown_display = $(this).parent().parent().find(".dropdown-toggle");
-	//$dropdown_display.html(nameCity);
-	//$dropdown_display.attr("data-id-city", id);
-	// set local storage
-	localStorage.setItem("data-id-city", id);
-	localStorage.setItem("data-name-city", nameCity);
-	var url = `/?idCity=${id}`;
-	RedirectToUrl(url);
-});
-function ShowPopupSuccess(message, title) {
+﻿function ShowPopupSuccess(message, title) {
 	var $modal = $('#modalAPI');
 	$modal.find('.modal-title').html(title ?? "Thành công")
 	$modal.find('.modal-text').html(message ?? "Thành công")
@@ -45,6 +33,24 @@ function RemoveLoading() {
 	});
 }
 $(function () {
+	$(".dropdown-item").on("click", function () {
+		var nameCity = $(this).find(".dropdown-item-value").html();
+		var id = $(this).find(".dropdown-item-value").attr("data-id-city");
+		var $dropdown_display = $(this).parent().parent().find(".dropdown-toggle");
+		//$dropdown_display.html(nameCity);
+		//$dropdown_display.attr("data-id-city", id);
+		// set local storage
+		localStorage.setItem("data-id-city", id);
+		localStorage.setItem("data-name-city", nameCity);
+		if ($(this).attr("data-admin") == 'true') {
+			var url = `/Admin/Home/Index?idCity=${id}`;
+			alert("vaop admin")
+		}
+		else {
+			var url = `/?idCity=${id}`;
+		}
+		RedirectToUrl(url);
+	});
 	// Handle scroll direction
 	var lastScrollTop = 0;
 	var header = $("header");
