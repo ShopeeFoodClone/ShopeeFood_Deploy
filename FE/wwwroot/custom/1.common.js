@@ -44,7 +44,6 @@ $(function () {
 		localStorage.setItem("data-name-city", nameCity);
 		if ($(this).attr("data-admin") == 'true') {
 			var url = `/Admin/Home/Index?idCity=${id}`;
-			alert("vaop admin")
 		}
 		else {
 			var url = `/?idCity=${id}`;

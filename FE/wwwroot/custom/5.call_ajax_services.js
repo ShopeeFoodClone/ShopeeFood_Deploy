@@ -186,6 +186,27 @@
 				var callAjax = new AjaxOption(configAjax);
 				callAjax.run();
 			}
+		},
+		DeleteUser: function (userId) {
+			var configAjax = {
+				url: '/Admin/User/DeleteUser?userId=' + userId,
+				type: 'Get',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							window.location.reload();
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
 		}
 	};
 	var _homePage = {
@@ -344,6 +365,127 @@
 				success: function (data) {
 					callBack(data);
 				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		GetStore: function (id, callBack) {
+			var configAjax = {
+				url: urlApi + '/store/' + id,
+				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					callBack(data);
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		UpdateStore: function ($form) {
+			var formData = new FormData();
+			var image = $form.find('#uploadImageUpdate').val().replace(/C:\\fakepath\\/i, '')
+			var id = $form.find('#id').val();
+			var title = $form.find('#title').val();
+			formData.append('file', $form.find('#uploadImageUpdate')[0].files[0]);
+			formData.append('id', id);
+			formData.append('name', title);
+			formData.append('image', image);
+			var configAjax = {
+				url: '/Admin/BranchStore/UpdateBranchStore',
+				type: 'POST',
+				data: formData,
+				beforeSend: function () { },
+				complete: function () { },
+				contentType: false,
+				processData: false,
+				success: function (res) {
+					var data = res.data ?? res;
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		CreateStore: function ($form) {
+			var formData = new FormData();
+			var image = $form.find('#uploadImageCreate').val().replace(/C:\\fakepath\\/i, '')
+			var name = $form.find('#name').val();
+			var openTime = $form.find('#openTime').val();
+			var closeTime = $form.find('#closeTime').val();
+			var address = $form.find('#street').val();
+			var tagDeals = $form.find('#tagDeals').val();
+			var isDeal = true;
+			if (tagDeals == '') {
+				isDeal = false;
+			}
+			var idBranchStore = $form.find('.slc-branchStore option:selected').val();
+			var idCollection = $form.find('.slc-collection option:selected').val();
+			var idConsumpType = $form.find('.slc-consumpType option:selected').val();
+			var idWard = $form.find('#slc-wards option:selected').val();
+
+			formData.append('file', $form.find('#uploadImageCreate')[0].files[0]);
+			formData.append('name', name);
+			formData.append('image', image);
+			formData.append('openTime', openTime);
+			formData.append('closeTime', closeTime);
+			formData.append('address', address);
+			formData.append('tagDeals', tagDeals);
+			formData.append('isDeal', isDeal);
+			formData.append('idBranchStore', idBranchStore);
+			formData.append('idCollection', idCollection);
+			formData.append('idConsumpType', idConsumpType);
+			formData.append('idWard', idWard);
+			var configAjax = {
+				url: '/Admin/Store/CreateStore',
+				type: 'POST',
+				data: formData,
+				beforeSend: function () { },
+				complete: function () { },
+				contentType: false,
+				processData: false,
+				success: function (res) {
+					var data = res.data ?? res;
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		DeleteStore: function (id) {
+			var configAjax = {
+				url: '/Admin/Store/DeleteStore?idStore=' + id,
+				type: 'Get',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (res) {
+					var data = res.data ?? res;
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				},
 			}
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
@@ -620,9 +762,9 @@
 					var data = res.data ?? res;
 					HideAllModal();
 					if (!data.isSuccess) {
-						ShowPopupFail(data.message);
+						ShowPopupFail(data.data);
 					} else {
-						ShowPopupSuccess(data.message);
+						ShowPopupSuccess(data.data);
 						setTimeout(function () {
 							RedirectToUrl(res);
 						}, 1500);
@@ -635,10 +777,8 @@
 		CreateBranchStore: function ($form) {
 			var formData = new FormData();
 			var image = $form.find('#uploadImageCreate').val().replace(/C:\\fakepath\\/i, '')
-			var id = $form.find('#id').val();
 			var title = $form.find('#title').val();
 			formData.append('file', $form.find('#uploadImageCreate')[0].files[0]);
-			formData.append('id', id);
 			formData.append('name', title);
 			formData.append('image', image);
 			var configAjax = {
@@ -653,9 +793,9 @@
 					var data = res.data ?? res;
 					HideAllModal();
 					if (!data.isSuccess) {
-						ShowPopupFail(data.message);
+						ShowPopupFail(data.data);
 					} else {
-						ShowPopupSuccess(data.message);
+						ShowPopupSuccess(data.data);
 						setTimeout(function () {
 							RedirectToUrl(res);
 						}, 1500);
@@ -675,9 +815,9 @@
 					var data = res.data ?? res;
 					HideAllModal();
 					if (!data.isSuccess) {
-						ShowPopupFail(data.message);
+						ShowPopupFail(data.data);
 					} else {
-						ShowPopupSuccess(data.message);
+						ShowPopupSuccess(data.data);
 						setTimeout(function () {
 							RedirectToUrl(res);
 						}, 1500);
@@ -689,7 +829,7 @@
 		}
 	};
 	var _consumpType = {
-		GetCategoryConsumpType: function (id,callBack) {
+		GetCategoryConsumpType: function (id, callBack) {
 			var configAjax = {
 				url: urlApi + '/categories-consumptype/details/' + id,
 				type: 'GET',
@@ -717,9 +857,9 @@
 					HideAllModal();
 					var data = res.data ?? res;
 					if (!data.isSuccess) {
-						ShowPopupFail(data.message);
+						ShowPopupFail(data.data);
 					} else {
-						ShowPopupSuccess(data.message);
+						ShowPopupSuccess(data.data);
 						setTimeout(function () {
 							RedirectToUrl(res);
 						}, 1500);
@@ -746,9 +886,9 @@
 					HideAllModal();
 					var data = res.data ?? res;
 					if (!data.isSuccess) {
-						ShowPopupFail(data.message);
+						ShowPopupFail(data.data);
 					} else {
-						ShowPopupSuccess(data.message);
+						ShowPopupSuccess(data.data);
 						setTimeout(function () {
 							RedirectToUrl(res);
 						}, 1500);
@@ -768,9 +908,9 @@
 					var data = res.data ?? res;
 					HideAllModal();
 					if (!data.isSuccess) {
-						ShowPopupFail(data.message);
+						ShowPopupFail(data.data);
 					} else {
-						ShowPopupSuccess(data.message);
+						ShowPopupSuccess(data.data);
 						setTimeout(function () {
 							RedirectToUrl(res);
 						}, 1500);
@@ -780,15 +920,234 @@
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
 		},
-		GetConsumpType: function (id) {
+		GetConsumpType: function (id, callBack) {
+			var configAjax = {
+				url: urlApi + '/categories-consumptype/consumptypes/' + id,
+				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					callBack(data);
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		GetConsumpTypesByCategory: function (idCategory, callBack) {
+			var configAjax = {
+				url: '/Admin/Store/PartialConsumpType?idCategoryConsumpType=' + idCategory,
+				type: 'GET',
+				dataType: 'text',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					callBack(data);
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
 		},
 		CreateConsumpType: function ($form) {
+			var idCategoryConsumpType = $form.find("#idCategoryConsumpType").val();
+			var title = $form.find("#title").val();
+			var request = {
+				IdCategoryConsumpType: idCategoryConsumpType,
+				Title: title
+			};
+			var configAjax = {
+				url: '/Admin/Category/CreateConsumptype',
+				type: 'POST',
+				data: JSON.stringify(request),
+				success: function (res) {
+					HideAllModal();
+					var data = res.data ?? res;
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
 		},
 		UpdateConsumpType: function ($form) {
+			var id = $form.find("#id").val();
+			var idCategoryConsumpType = $form.find("#idCategoryConsumpType").val();
+			var title = $form.find("#title").val();
+			var request = {
+				Id: id,
+				IdCategoryConsumpType: idCategoryConsumpType,
+				Title: title
+			};
+			var configAjax = {
+				url: '/Admin/Category/UpdateConsumptype',
+				type: 'POST',
+				data: JSON.stringify(request),
+				success: function (res) {
+					HideAllModal();
+					var data = res.data ?? res;
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
 		},
 		DeleteConsumpType: function (id) {
+			var configAjax = {
+				url: '/Admin/Category/DeleteConsumptype?idConsumptype=' + id,
+				type: 'Get',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							window.location.reload();
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
 		},
 	};
+	var _collection = {
+		GetCollection: function (id, callBack) {
+			var configAjax = {
+				url: urlApi + '/collections/' + id,
+				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					callBack(data);
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		GetCollectionByCategory: function (idCategory, callBack) {
+			var configAjax = {
+				url:'/Admin/Store/PartialCollection?idCategoryConsumpType=' + idCategory,
+				type: 'GET',
+				dataType: 'text',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					callBack(data);
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		CreateCollection: function ($form) {
+			var formData = new FormData();
+			var image = $form.find('#uploadImageCreate').val().replace(/C:\\fakepath\\/i, '')
+			var idCategoryConsumpType = $form.find('#idCategoryConsumpType').val();
+			var title = $form.find('#title').val();
+			var description = $form.find('#description').val();
+			formData.append('file', $form.find('#uploadImageCreate')[0].files[0]);
+			formData.append('title', title);
+			formData.append('image', image);
+			formData.append('idCategoryConsumpType', idCategoryConsumpType);
+			formData.append('description', description);
+			var configAjax = {
+				url: '/Admin/Collection/CreateCollection',
+				type: 'POST',
+				data: formData,
+				beforeSend: function () { },
+				complete: function () { },
+				contentType: false,
+				processData: false,
+				success: function (res) {
+					var data = res.data ?? res;
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		UpdateCollection: function ($form) {
+			var formData = new FormData();
+			var image = $form.find('#uploadImageUpdate').val().replace(/C:\\fakepath\\/i, '')
+			var idCategoryConsumpType = $form.find('#idCategoryConsumpType').val();
+			var title = $form.find('#title').val();
+			var id = $form.find('#id').val();
+			var description = $form.find('#description').val();
+			formData.append('file', $form.find('#uploadImageUpdate')[0].files[0]);
+			formData.append('title', title);
+			formData.append('image', image);
+			formData.append('id', id);
+			formData.append('idCategoryConsumpType', idCategoryConsumpType);
+			formData.append('description', description);
+			var configAjax = {
+				url: '/Admin/Collection/UpdateCollection',
+				type: 'POST',
+				data: formData,
+				beforeSend: function () { },
+				complete: function () { },
+				contentType: false,
+				processData: false,
+				success: function (res) {
+					var data = res.data ?? res;
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		DeleteCollection: function (id) {
+			var configAjax = {
+				url: '/Admin/Collection/DeleteCollection?idCollection=' + id,
+				type: 'Get',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							window.location.reload();
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		}
+	};
+
 	return {
 		auth: _auth,
 		homePage: _homePage,
@@ -798,6 +1157,7 @@
 		cart: _cart,
 		common: _common,
 		branchStore: _branchStore,
-		consumpType: _consumpType
+		consumpType: _consumpType,
+		collection: _collection
 	};
 })();
