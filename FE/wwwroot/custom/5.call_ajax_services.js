@@ -713,6 +713,19 @@
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
 		},
+		GetWard: function (idWard, callBack) {
+			var configAjax = {
+				url: urlApi + '/province/ward/' + idWard,
+				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (res) {
+					callBack(res);
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
 		FullAddress: function (idWard, callBack) {
 			var configAjax = {
 				url: urlApi + '/province/full-address/' + idWard,

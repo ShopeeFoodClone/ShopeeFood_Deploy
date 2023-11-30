@@ -15,9 +15,11 @@ function RedirectToUrl(res) {
 	window.location.href = res.url ?? res
 }
 function AppendLoading() {
-	var div = document.createElement('div');
-	div.classList.add("loading");
-	document.body.appendChild(div);
+	if ($('body').find(".loading").length == 0) {
+		var div = document.createElement('div');
+		div.classList.add("loading");
+		document.body.appendChild(div);
+	}
 }
 function RemoveLoading() {
 	const loader = document.querySelector(".loading")
