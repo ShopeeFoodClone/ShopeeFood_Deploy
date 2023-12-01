@@ -59,7 +59,7 @@
 				var $div = $("#store-common");
 				res.forEach(function (e) {
 					var card = `
-					<a href="/Store/DetailsBranchStores?idBranchStore=${e.idBranchStore}" class="col-12 text-dark text-decoration-none">
+					<a href="/Store/DetailsBranchStores?idStore=${e.id}" class="col-12 text-dark text-decoration-none">
 						<div class="card">
 							<div class="card-body p-0 col">
 								<div class="row">

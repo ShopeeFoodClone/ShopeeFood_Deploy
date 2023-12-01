@@ -96,11 +96,10 @@ $(function () {
 	// handle input enter only digit
 	$(".number-only").on("keydown", function (e) {
 		// Only allow if the e.key value is a number or if it's 'Backspace'
-		if (isNaN(e.key) && e.key !== 'Backspace' && e.key !== 'Tab' && e.key !== 'Ctrl') {
+		if (isNaN(e.key) && e.key !== 'Backspace' && e.key !== 'Tab' && e.key !== 'Ctrl' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
 			e.preventDefault();
 		}
 	});
-
 	//loading
 	const loader = document.querySelector(".preload")
 	loader.classList.add("loading-hidden")

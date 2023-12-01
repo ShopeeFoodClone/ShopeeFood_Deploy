@@ -207,6 +207,27 @@
 			}
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
+		},
+		ActiveUser: function (userId) {
+			var configAjax = {
+				url: '/Admin/User/ActiveUser?userId=' + userId,
+				type: 'Get',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							window.location.reload();
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
 		}
 	};
 	var _homePage = {
@@ -386,28 +407,49 @@
 			var formData = new FormData();
 			var image = $form.find('#uploadImageUpdate').val().replace(/C:\\fakepath\\/i, '')
 			var id = $form.find('#id').val();
-			var title = $form.find('#title').val();
+			var name = $form.find('#name').val();
+			var openTime = $form.find('#openTime').val();
+			var closeTime = $form.find('#closeTime').val();
+			var address = $form.find('#street').val();
+			var tagDeals = $form.find('#tagDeals').val();
+			var isDeal = true;
+			if (tagDeals == '') {
+				isDeal = false;
+			}
+			var idBranchStore = $form.find('.slc-branchStore option:selected').val();
+			var idCollection = $form.find('.slc-collection option:selected').val();
+			var idConsumpType = $form.find('.slc-consumpType option:selected').val();
+			var idWard = $form.find('#slc-wards option:selected').val();
+
 			formData.append('file', $form.find('#uploadImageUpdate')[0].files[0]);
 			formData.append('id', id);
-			formData.append('name', title);
+			formData.append('name', name);
 			formData.append('image', image);
+			formData.append('openTime', openTime);
+			formData.append('closeTime', closeTime);
+			formData.append('address', address);
+			formData.append('tagDeals', tagDeals);
+			formData.append('isDeal', isDeal);
+			formData.append('idBranchStore', idBranchStore);
+			formData.append('idCollection', idCollection);
+			formData.append('idConsumpType', idConsumpType);
+			formData.append('idWard', idWard);
 			var configAjax = {
-				url: '/Admin/BranchStore/UpdateBranchStore',
+				url: '/Admin/Store/UpdateStore',
 				type: 'POST',
 				data: formData,
 				beforeSend: function () { },
 				complete: function () { },
 				contentType: false,
 				processData: false,
-				success: function (res) {
-					var data = res.data ?? res;
+				success: function (data) {
 					HideAllModal();
 					if (!data.isSuccess) {
 						ShowPopupFail(data.data);
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
-							RedirectToUrl(res);
+							window.location.reload();
 						}, 1500);
 					}
 				},
@@ -489,7 +531,229 @@
 			}
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
-		}
+		},
+		ActiveStore: function (id) {
+			var configAjax = {
+				url: '/Admin/Store/ActiveStore?idStore=' + id,
+				type: 'Get',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (res) {
+					var data = res.data ?? res;
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							RedirectToUrl(res);
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		GetCategoryProduct: function (id, callBack) {
+			var configAjax = {
+				url: urlApi + '/category-products/' + id,
+				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					if (data.isSuccess) {
+						callBack(data.data);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		CreateCategoryProduct: function ($form) {
+			var idStore = $form.find("#idStore").val();
+			var title = $form.find("#title").val();
+			var request = {
+				IdStore: idStore,
+				Title: title
+			};
+			var configAjax = {
+				url: '/Admin/Store/CreateCategoryProduct',
+				type: 'POST',
+				data: JSON.stringify(request),
+				success: function (data) {
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							window.location.reload();
+						}, 1500);
+					}
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		UpdateCategoryProduct: function ($form) {
+			var id = $form.find("#id").val();
+			var idStore = $form.find("#idStore").val();
+			var title = $form.find("#title").val();
+			var request = {
+				IdStore: idStore,
+				Title: title,
+				Id: id
+			};
+			var configAjax = {
+				url: '/Admin/Store/UpdateCategoryProduct',
+				type: 'POST',
+				data: JSON.stringify(request),
+				success: function (data) {
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							window.location.reload();
+						}, 1500);
+					}
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		DeleteCategoryProduct: function (id) {
+			var configAjax = {
+				url: '/Admin/Store/DeleteCategoryProduct?idCategoryProduct=' + id,
+				type: 'Get',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							window.location.reload();
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		GetProduct: function (id, callBack) {
+			var configAjax = {
+				url: urlApi + '/products/' + id,
+				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					if (data.isSuccess) {
+						callBack(data.data);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		CreateProduct: function ($form) {
+			var formData = new FormData();
+			var image = $form.find('#uploadImageCreateProduct').val().replace(/C:\\fakepath\\/i, '')
+			var name = $form.find('#name').val();
+			var description = $form.find('#description').val();
+			var idCategoryProduct = $form.find('#idCategoryProduct').val();
+			var price = $form.find('#price').val();
+			formData.append('file', $form.find('#uploadImageCreateProduct')[0].files[0]);
+			formData.append('name', name);
+			formData.append('image', image);
+			formData.append('description', description);
+			formData.append('price', price);
+			formData.append('idCategoryProduct', idCategoryProduct);
+			var configAjax = {
+				url: '/Admin/Store/CreateProduct',
+				type: 'POST',
+				data: formData,
+				beforeSend: function () { },
+				complete: function () { },
+				contentType: false,
+				processData: false,
+				success: function (data) {
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							window.location.reload();
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		UpdateProduct: function ($form) {
+			var formData = new FormData();
+			var image = $form.find('#uploadImageUpdateProduct').val().replace(/C:\\fakepath\\/i, '')
+			var name = $form.find('#name').val();
+			var description = $form.find('#description').val();
+			var idCategoryProduct = $form.find('#idCategoryProduct').val();
+			var id = $form.find('#id').val();
+			var price = $form.find('#price').val();
+			formData.append('file', $form.find('#uploadImageUpdateProduct')[0].files[0]);
+			formData.append('name', name);
+			formData.append('image', image);
+			formData.append('description', description);
+			formData.append('price', price);
+			formData.append('idCategoryProduct', idCategoryProduct);
+			formData.append('id', id);
+			var configAjax = {
+				url: '/Admin/Store/UpdateProduct',
+				type: 'POST',
+				data: formData,
+				beforeSend: function () { },
+				complete: function () { },
+				contentType: false,
+				processData: false,
+				success: function (data) {
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							window.location.reload();
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		DeleteProduct: function (id) {
+			var configAjax = {
+				url: '/Admin/Store/DeleteProduct?idProduct=' + id,
+				type: 'Get',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							window.location.reload();
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
 	};
 	var _information = {
 		UploadAvatar: function ($formUpload) {
@@ -832,7 +1096,29 @@
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
-							RedirectToUrl(res);
+							window.location.reload();
+						}, 1500);
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		ActiveBranchStore: function (id) {
+			var configAjax = {
+				url: '/Admin/BranchStore/ActiveBranchStore?idBranchStore=' + id,
+				type: 'Get',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (res) {
+					var data = res.data ?? res;
+					HideAllModal();
+					if (!data.isSuccess) {
+						ShowPopupFail(data.data);
+					} else {
+						ShowPopupSuccess(data.data);
+						setTimeout(function () {
+							window.location.reload();
 						}, 1500);
 					}
 				},
@@ -1054,7 +1340,7 @@
 		},
 		GetCollectionByCategory: function (idCategory, callBack) {
 			var configAjax = {
-				url:'/Admin/Store/PartialCollection?idCategoryConsumpType=' + idCategory,
+				url: '/Admin/Store/PartialCollection?idCategoryConsumpType=' + idCategory,
 				type: 'GET',
 				dataType: 'text',
 				beforeSend: function () { },
@@ -1171,6 +1457,6 @@
 		common: _common,
 		branchStore: _branchStore,
 		consumpType: _consumpType,
-		collection: _collection
+		collection: _collection,
 	};
 })();
