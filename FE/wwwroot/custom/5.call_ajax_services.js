@@ -970,6 +970,7 @@
 				url: '/Home/PartialWards?idDistrict=' + idDistrict,
 				type: 'GET',
 				dataType: 'text',
+				async: false,
 				success: function (res) {
 					callBack(res);
 				}
@@ -1237,6 +1238,7 @@
 				url: '/Admin/Store/PartialConsumpType?idCategoryConsumpType=' + idCategory,
 				type: 'GET',
 				dataType: 'text',
+				async: false,
 				beforeSend: function () { },
 				complete: function () { },
 				success: function (data) {
@@ -1345,6 +1347,7 @@
 				dataType: 'text',
 				beforeSend: function () { },
 				complete: function () { },
+				async: false,
 				success: function (data) {
 					callBack(data);
 				},
