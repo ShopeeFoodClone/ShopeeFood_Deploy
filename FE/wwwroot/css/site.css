@@ -239,7 +239,6 @@ select:focus {
 				background-color: rgba(0,0,0,0.1);
 			}
 
-
 .header .navbar-nav .nav-item a {
 	text-align: center;
 	margin: 10px;
@@ -716,4 +715,15 @@ input[type = password]::-ms-clear {
 
 .w-60 {
 	width: 60% !important;
+}
+
+.table tbody > tr:last-child > td {
+	border-bottom: 0;
+}
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+	background:var(--color-shopee);
+}
+.owl-nav {
+	display: none;
 }

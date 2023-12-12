@@ -3,7 +3,7 @@ class AjaxOption {
 	"use strict";
 	statusCode = {
 		401: function () { window.location.href = "/Auth/Login" },
-		404: function () { window.location.href = "/Home/Error?message=ERROR%20404" },
+		//404: function () { window.location.href = "/Home/Error?message=ERROR%20404" },
 	}
 	constructor(config) {
 		this.type = config.type ?? 'GET';

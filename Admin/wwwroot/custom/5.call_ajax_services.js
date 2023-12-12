@@ -240,7 +240,6 @@
 						ShowPopupFail(data.message);
 					}
 					else {
-
 						callBack(data.data);
 					}
 				},
@@ -357,6 +356,52 @@
 		}
 	};
 	var _store = {
+		UpdateCart: function ($form) {
+			var request = {
+				Id: $form.find("#idCart").val(),
+				Status: $form.find("#status").val(),
+			};
+			var configAjax = {
+				url: '/Admin/Store/UpdateCart',
+				type: 'POST',
+				data: JSON.stringify(request),
+				success: function (data) {
+					if (!data.isSuccess) {
+						ShowPopupFail(data.message);
+					} else {
+						window.location.reload();
+					}
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		GetNumStoresByCity: function (idCity, callBack) {
+			var configAjax = {
+				url: urlApi + '/orther/stores/city/' + idCity,
+				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					callBack(data);
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		GetNumBranchStoresByCity: function (callBack) {
+			var configAjax = {
+				url: urlApi + '/orther/branch-stores',
+				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (data) {
+					callBack(data);
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
 		FilterStore: function ($dropdownDistricts, $dropdownConsumpType, searchText) {
 			var request = _constructorCommon.store.FilterStore($dropdownDistricts, $dropdownConsumpType, searchText)
 			var configAjax = {
@@ -543,7 +588,7 @@
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
-							RedirectToUrl(res);
+							window.location.reload();
 						}, 1500);
 					}
 				},
@@ -565,7 +610,7 @@
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
-							RedirectToUrl(res);
+							window.location.reload();
 						}, 1500);
 					}
 				},
@@ -602,7 +647,7 @@
 				success: function (data) {
 					HideAllModal();
 					if (!data.isSuccess) {
-						ShowPopupFail(data.data);
+						ShowPopupFail(data.message);
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
@@ -630,7 +675,7 @@
 				success: function (data) {
 					HideAllModal();
 					if (!data.isSuccess) {
-						ShowPopupFail(data.data);
+						ShowPopupFail(data.message);
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
@@ -702,7 +747,7 @@
 				success: function (data) {
 					HideAllModal();
 					if (!data.isSuccess) {
-						ShowPopupFail(data.data);
+						ShowPopupFail(data.message);
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
@@ -740,7 +785,7 @@
 				success: function (data) {
 					HideAllModal();
 					if (!data.isSuccess) {
-						ShowPopupFail(data.data);
+						ShowPopupFail(data.message);
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
@@ -816,7 +861,8 @@
 			var request = {
 				SearchText: $form.find("#searchText").val(),
 				Sort: $form.find("#slc-sort-by option:selected").val(),
-				IdStore: $form.find("#slc-sort-stores option:selected").val()
+				IdStore: $form.find("#slc-sort-stores option:selected").val(),
+				Status: $form.find("#slc-sort-status option:selected").val()
 			}
 			var configAjax = {
 				url: '/Admin/Product/FilterProduct',
@@ -979,6 +1025,27 @@
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
 		},
+		FilterHistoryOrderAdmin: function ($form) {
+			var request = _constructorCommon.cart.FilterHistoryOrder($form);
+			var configAjax = {
+				url: '/Admin/Store/FilterHistoryOrder',
+				type: 'POST',
+				beforeSend: function () { },
+				complete: function () { },
+				data: JSON.stringify(request),
+				success: function (res) {
+					var data = res.data ?? res;
+					if (!data.isSuccess) {
+						ShowPopupFail(data.message);
+					}
+					else {
+						RedirectToUrl(res);
+					}
+				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
 		ClearCart: function () {
 			var configAjax = {
 				url: '/Cart/ClearCart',
@@ -1115,7 +1182,7 @@
 					var data = res.data ?? res;
 					HideAllModal();
 					if (!data.isSuccess) {
-						ShowPopupFail(data.data);
+						ShowPopupFail(data.message);
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
@@ -1146,7 +1213,7 @@
 					var data = res.data ?? res;
 					HideAllModal();
 					if (!data.isSuccess) {
-						ShowPopupFail(data.data);
+						ShowPopupFail(data.message);
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
@@ -1249,11 +1316,11 @@
 					HideAllModal();
 					var data = res.data ?? res;
 					if (!data.isSuccess) {
-						ShowPopupFail(data.data);
+						ShowPopupFail(data.message);
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
-							RedirectToUrl(res);
+							window.location.reload();
 						}, 1500);
 					}
 				}
@@ -1278,11 +1345,11 @@
 					HideAllModal();
 					var data = res.data ?? res;
 					if (!data.isSuccess) {
-						ShowPopupFail(data.data);
+						ShowPopupFail(data.message);
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
-							RedirectToUrl(res);
+							window.location.reload();
 						}, 1500);
 					}
 				}
@@ -1355,11 +1422,11 @@
 					HideAllModal();
 					var data = res.data ?? res;
 					if (!data.isSuccess) {
-						ShowPopupFail(data.data);
+						ShowPopupFail(data.message);
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
-							RedirectToUrl(res);
+							window.location.reload();
 						}, 1500);
 					}
 				}
@@ -1384,11 +1451,11 @@
 					HideAllModal();
 					var data = res.data ?? res;
 					if (!data.isSuccess) {
-						ShowPopupFail(data.data);
+						ShowPopupFail(data.message);
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {
-							RedirectToUrl(res);
+							window.location.reload();
 						}, 1500);
 					}
 				}
@@ -1507,7 +1574,7 @@
 					var data = res.data ?? res;
 					HideAllModal();
 					if (!data.isSuccess) {
-						ShowPopupFail(data.data);
+						ShowPopupFail(data.message);
 					} else {
 						ShowPopupSuccess(data.data);
 						setTimeout(function () {

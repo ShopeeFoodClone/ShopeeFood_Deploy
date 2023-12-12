@@ -726,3 +726,7 @@ input[type = password]::-ms-clear {
 .w-60 {
 	width: 60% !important;
 }
+
+.table tbody > tr:last-child > td {
+	border-bottom: 0;
+}
