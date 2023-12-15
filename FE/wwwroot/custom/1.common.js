@@ -35,6 +35,20 @@ function RemoveLoading() {
 	});
 }
 $(function () {
+	$('.dropdown-menu').click(function (e) {
+		if ($(e.target).is(':checkbox')) {
+			return true;
+		}
+		if ($(e.target).is('form')) {
+			return true;
+		}
+		if ($(e.target).is('button')) {
+			return true;
+		}
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		return false;
+	});
 	$(".dropdown-item").on("click", function () {
 		var nameCity = $(this).find(".dropdown-item-value").html();
 		var id = $(this).find(".dropdown-item-value").attr("data-id-city");

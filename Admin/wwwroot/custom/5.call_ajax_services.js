@@ -366,10 +366,14 @@
 				type: 'POST',
 				data: JSON.stringify(request),
 				success: function (data) {
+					HideAllModal();
 					if (!data.isSuccess) {
 						ShowPopupFail(data.message);
 					} else {
-						window.location.reload();
+						ShowPopupSuccess(data.message);
+						setTimeout(function () {
+							window.location.reload();
+						}, 2000);
 					}
 				}
 			}
@@ -857,18 +861,41 @@
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();
 		},
+		ClearFilterStoreAdmin: function () {
+			var configAjax = {
+				url: '/Admin/Store/ClearFilterStore',
+				success: function (res) {
+					window.location.reload();
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
 		FilterProduct: function ($form) {
 			var request = {
 				SearchText: $form.find("#searchText").val(),
 				Sort: $form.find("#slc-sort-by option:selected").val(),
 				IdStore: $form.find("#slc-sort-stores option:selected").val(),
-				Status: $form.find("#slc-sort-status option:selected").val()
+				Status: $form.find("#slc-sort-status option:selected").val(),
+				MaxPrice: $form.find("#maxPrice").val(),
+				MinPrice: $form.find("#minPrice").val(),
 			}
 			var configAjax = {
 				url: '/Admin/Product/FilterProduct',
 				type: 'Post',
 				data: JSON.stringify(request),
 				success: function (res) {
+					window.location.reload();
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		ClearFilterProduct: function () {
+			var configAjax = {
+				url: '/Admin/Product/ClearFilterProduct',
+				type: 'Get',
+				success: function () {
 					window.location.reload();
 				},
 			}
@@ -1077,6 +1104,21 @@
 				success: function (res) {
 					callBack(res);
 				}
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		GetNumCartEachStore: function (callBack) {
+			var configAjax = {
+				url: urlApi + '/cart/orders/today/',
+				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (res) {
+					if (res.isSuccess) {
+						callBack(res.data)
+					}
+				},
 			}
 			var callAjax = new AjaxOption(configAjax);
 			callAjax.run();

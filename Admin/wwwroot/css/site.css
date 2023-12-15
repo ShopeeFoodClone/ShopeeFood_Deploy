@@ -730,3 +730,9 @@ input[type = password]::-ms-clear {
 .table tbody > tr:last-child > td {
 	border-bottom: 0;
 }
+.th-sort {
+	cursor: pointer;
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* IE 10 and IE 11 */
+	user-select: none; /* Standard syntax */
+}
