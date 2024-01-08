@@ -7,7 +7,7 @@ $(() => {
 	$("#slc-sort-by").on("change", function () {
 		_callAjax.store.FilterStoreAdmin($("#filterStore"));
 	});
-	$("#slc-sort-districts").on("change", function () {
+	$("#dropdown-district-submit").on("click", function () {
 		_callAjax.store.FilterStoreAdmin($("#filterStore"));
 	});
 	$("#slc-sort-status").on("change", function () {
@@ -20,7 +20,6 @@ $(() => {
 	});
 	$("#clearFilter").on("click", function () {
 		_callAjax.store.ClearFilterStoreAdmin();
-
 	});
 	$(".slc-category").on("change", function () {
 		var idCategoryConsumpType = $(this).find("option:selected").val();
@@ -30,7 +29,6 @@ $(() => {
 				$(".slc-collection").html(data);
 			});
 		});
-
 	});
 	$("#formDeleteStore").submit(function (e) {
 		e.preventDefault();

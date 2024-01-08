@@ -844,10 +844,17 @@
 			callAjax.run();
 		},
 		FilterStoreAdmin: function ($form) {
+			$dropdown = $form.find("#dropdown-districts");
+			var $checkboxStores = $dropdown.find("input[type=checkbox]:checked");
+			var idDistricts = [];
+			$checkboxStores.each(function () {
+				var idDistrict = $(this).attr("data-id-district");
+				idDistricts.push(idDistrict);
+			});
 			var request = {
 				SearchText: $form.find("#searchText").val(),
 				Sort: $form.find("#slc-sort-by option:selected").val(),
-				IdDistrict: $form.find("#slc-sort-districts option:selected").val(),
+				IdDistricts: idDistricts,
 				Status: $form.find("#slc-sort-status option:selected").val()
 			}
 			var configAjax = {
@@ -872,10 +879,17 @@
 			callAjax.run();
 		},
 		FilterProduct: function ($form) {
+			$dropdown = $form.find("#dropdown-stores");
+			var $checkboxStores = $dropdown.find("input[type=checkbox]:checked");
+			var idStores = [];
+			$checkboxStores.each(function () {
+				var idDistrict = $(this).attr("data-id-store");
+				idStores.push(idDistrict);
+			});
 			var request = {
 				SearchText: $form.find("#searchText").val(),
 				Sort: $form.find("#slc-sort-by option:selected").val(),
-				IdStore: $form.find("#slc-sort-stores option:selected").val(),
+				IdStores: idStores,
 				Status: $form.find("#slc-sort-status option:selected").val(),
 				MaxPrice: $form.find("#maxPrice").val(),
 				MinPrice: $form.find("#minPrice").val(),
@@ -1112,6 +1126,28 @@
 			var configAjax = {
 				url: urlApi + '/cart/orders/today/',
 				type: 'GET',
+				beforeSend: function () { },
+				complete: function () { },
+				success: function (res) {
+					if (res.isSuccess) {
+						callBack(res.data)
+					}
+				},
+			}
+			var callAjax = new AjaxOption(configAjax);
+			callAjax.run();
+		},
+		GetTotalCartFromToDay: function (idStores, startDate, endDate, callBack) {
+			var request = {
+				IdStores: idStores,
+				StartDate: startDate,
+				EndDate: endDate,
+				IdCity: localStorage.getItem("data-id-city")
+			}
+			var configAjax = {
+				url: urlApi + '/cart/orders/from_to_day/',
+				type: 'POST',
+				data: JSON.stringify(request),
 				beforeSend: function () { },
 				complete: function () { },
 				success: function (res) {

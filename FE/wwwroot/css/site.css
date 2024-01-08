@@ -721,9 +721,10 @@ input[type = password]::-ms-clear {
 	border-bottom: 0;
 }
 
-.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
-	background:var(--color-shopee);
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+	background: var(--color-shopee);
 }
+
 .owl-nav {
 	display: none;
 }

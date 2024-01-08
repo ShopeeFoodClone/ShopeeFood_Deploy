@@ -1,4 +1,3 @@
-
 $(() => {
 	$(".btn-edit").on("click", function () {
 		var id = $(this).attr("data-id")

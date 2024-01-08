@@ -45,6 +45,9 @@ $(function () {
 		if ($(e.target).is('button')) {
 			return true;
 		}
+		if ($(e.target).is('a')) {
+			return true;
+		}
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		return false;

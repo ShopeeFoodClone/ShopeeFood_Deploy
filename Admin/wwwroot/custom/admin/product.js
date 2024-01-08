@@ -41,7 +41,15 @@ $(() => {
 		e.preventDefault();
 		_callAjax.store.FilterProduct($(this));
 	});
+	$("#formSubmitPrice").submit(function (e) {
+		e.preventDefault();
+		_callAjax.store.FilterProduct($("#filterProduct"));
+	})
 	$("#slc-sort-by").on("change", function () {
+		_callAjax.store.FilterProduct($("#filterProduct"));
+	});
+
+	$("#dropdown-stores-submit").on("click", function () {
 		_callAjax.store.FilterProduct($("#filterProduct"));
 	});
 	$("#slc-sort-stores").on("change", function () {

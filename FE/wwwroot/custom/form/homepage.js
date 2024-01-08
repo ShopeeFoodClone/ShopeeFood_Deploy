@@ -5,7 +5,7 @@
 			var $div = $("#deals");
 			res.forEach(function (e) {
 				var card = `
-				<div class="col-6 col-lg-4 col-md-6">
+				<div class="col-6 col-lg-4 col-md-6" >
 					<a href="/Store/DetailsStore?idStore=${e.id}" class="  text-decoration-none text-dark">
 						<div class="card">
 							<div class="card-body p-0">
@@ -59,7 +59,7 @@
 				var $div = $("#store-common");
 				res.forEach(function (e) {
 					var card = `
-					<a href="/Store/DetailsBranchStores?idStore=${e.id}" class="col-12 text-dark text-decoration-none">
+					<a href="/Store/DetailsBranchStores?idStore=${e.id}" class="col-12 text-dark text-decoration-none" data-aos="fade" data-aos-duration="500">
 						<div class="card">
 							<div class="card-body p-0 col">
 								<div class="row">

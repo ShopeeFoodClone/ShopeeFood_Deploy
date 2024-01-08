@@ -9,7 +9,7 @@
 			$("#back").show();
 		}
 	});
-	 _configDatePicker.initDateMinus100($("#dob"));
+	_configDatePicker.initDateMinus100($("#dob"));
 	// Button show hide password
 	$(".btn-show-hide-password").on("click", function () {
 		const $btn = $(this);

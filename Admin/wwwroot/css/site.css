@@ -402,6 +402,7 @@ main {
 	font-weight: 500;
 	color: #cd132f;
 }
+
 .page-item ~ .active .page-link:first-child {
 	background-color: #cf2127 !important;
 }
@@ -730,6 +731,7 @@ input[type = password]::-ms-clear {
 .table tbody > tr:last-child > td {
 	border-bottom: 0;
 }
+
 .th-sort {
 	cursor: pointer;
 	-webkit-user-select: none; /* Safari */

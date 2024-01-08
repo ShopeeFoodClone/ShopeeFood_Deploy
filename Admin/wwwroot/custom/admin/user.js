@@ -50,7 +50,6 @@ $(() => {
 			$modal.find("#updatedTime").html(formattedDateUpdatedTime);
 			$modal.find("#gender").html(res.gender);
 			$modal.modal("show");
-
 		});
 	});
 	$(".btn-active").on("click", function () {

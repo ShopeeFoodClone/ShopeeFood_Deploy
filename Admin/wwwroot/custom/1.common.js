@@ -1,4 +1,14 @@
-﻿
+﻿function FormatStringToGeneral(str) {
+	str = str.toLowerCase();
+	str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+	str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+	str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+	str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+	str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+	str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+	str = str.replace(/đ/g, "d");
+	return str;
+}
 function ShowPopupSuccess(message, title) {
 	var $modal = $('#modalAPI');
 	$modal.find('.modal-title').html(title ?? "Thành công")
@@ -46,6 +56,9 @@ $(function () {
 		if ($(e.target).is('button')) {
 			return true;
 		}
+		if ($(e.target).is('a')) {
+			return true;
+		}
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		return false;
@@ -70,9 +83,8 @@ $(function () {
 		if ($.isNumeric(valA) && $.isNumeric(valB)) {
 			return valA - valB;
 		} else {
-
 			const dateA = stringToDate(valA);
-			const dateB =stringToDate(valB);
+			const dateB = stringToDate(valB);
 			if (!isNaN(dateA) && !isNaN(dateB)) {
 				return dateA - dateB;
 			} else {
@@ -81,15 +93,19 @@ $(function () {
 		}
 	}
 	function stringToDate(dateString) {
-		let dateParts = dateString.split(/\/|\s|:/); // Split by "/", " ", or ":"
-		let year = parseInt(dateParts[2], 10);
-		let month = parseInt(dateParts[1], 10) - 1; // Months are 0-based in JavaScript Date
-		let day = parseInt(dateParts[0], 10);
-		let hours = parseInt(dateParts[3], 10);
-		let minutes = parseInt(dateParts[4], 10);
+		try {
+			let dateParts = dateString.split(/\/|\s|:/); // Split by "/", " ", or ":"
+			let year = parseInt(dateParts[2], 10);
+			let month = parseInt(dateParts[1], 10) - 1; // Months are 0-based in JavaScript Date
+			let day = parseInt(dateParts[0], 10);
+			let hours = parseInt(dateParts[3], 10);
+			let minutes = parseInt(dateParts[4], 10);
 
-		let dateObject = new Date(year, month, day, hours, minutes);
-		return dateObject;
+			let dateObject = new Date(year, month, day, hours, minutes);
+			return dateObject;
+		} catch (e) {
+			return '';
+		}
 	}
 
 	function getCellValue(row, index, type) {
@@ -99,7 +115,6 @@ $(function () {
 			value = parseInt(value.replace(/[^\d]/g, ''), 10);
 		return value
 	}
-
 
 	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
